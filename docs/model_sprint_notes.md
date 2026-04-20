@@ -1,0 +1,59 @@
+﻿# Project Sprint & Engineering Log
+
+Incremental sprint updates.
+
+- **[2026-04-20T17:26:49]** feat(portal): build clinical patient records portal with diagnostic confidence
+- **[2026-04-20T11:41:08]** feat(opencv): build OpenCV image preprocessing and normalization pipeline
+- **[2026-04-20T16:17:13]** feat(reports): add automated PDF diagnostic report generator with disclaimer
+- **[2026-04-21T20:26:46]** feat(resnet): integrate ResNet-18 deep learning model for brain MRI scan analysis
+- **[2026-04-23T13:52:41]** fix(segmentation): resolve temporal lobe anomaly mask bounding box math
+- **[2026-04-23T16:11:06]** feat(reports): add automated PDF diagnostic report generator with disclaimer
+- **[2026-04-24T09:59:30]** refactor(fastapi): modularize FastAPI endpoints for multi-modality scan uploads
+- **[2026-04-27T14:43:06]** feat(reports): add automated PDF diagnostic report generator with disclaimer
+- **[2026-04-29T17:11:50]** refactor(fastapi): modularize FastAPI endpoints for multi-modality scan uploads
+- **[2026-04-30T11:07:58]** fix(segmentation): resolve temporal lobe anomaly mask bounding box math
+- **[2026-05-02T19:17:43]** feat(rf): implement Random Forest classifier comparison benchmark
+- **[2026-05-02T13:58:31]** feat(opencv): build OpenCV image preprocessing and normalization pipeline
+- **[2026-05-02T10:22:22]** feat(resnet): integrate ResNet-18 deep learning model for brain MRI scan analysis
+- **[2026-05-04T11:13:09]** docs(metrics): document model accuracy, specificity, and ROC AUC evaluation
+- **[2026-05-07T22:00:05]** style(dashboard): polish clinical dark/light diagnostic dashboard interface
+- **[2026-05-15T10:19:25]** refactor(fastapi): modularize FastAPI endpoints for multi-modality scan uploads
+- **[2026-05-15T10:15:51]** feat(portal): build clinical patient records portal with diagnostic confidence
+- **[2026-05-20T10:56:18]** feat(reports): add automated PDF diagnostic report generator with disclaimer
+- **[2026-05-22T10:53:36]** feat(portal): build clinical patient records portal with diagnostic confidence
+- **[2026-05-23T09:29:03]** feat(rf): implement Random Forest classifier comparison benchmark
+- **[2026-05-25T22:46:59]** feat(resnet): integrate ResNet-18 deep learning model for brain MRI scan analysis
+- **[2026-05-27T11:31:43]** fix(segmentation): resolve temporal lobe anomaly mask bounding box math
+- **[2026-05-27T12:44:44]** feat(rf): implement Random Forest classifier comparison benchmark
+- **[2026-06-01T09:00:08]** feat(rf): implement Random Forest classifier comparison benchmark
+- **[2026-06-08T12:17:31]** refactor(fastapi): modularize FastAPI endpoints for multi-modality scan uploads
+- **[2026-06-09T20:50:11]** docs(metrics): document model accuracy, specificity, and ROC AUC evaluation
+- **[2026-06-09T19:31:07]** feat(portal): build clinical patient records portal with diagnostic confidence
+- **[2026-06-12T14:05:02]** refactor(fastapi): modularize FastAPI endpoints for multi-modality scan uploads
+- **[2026-06-22T15:10:14]** feat(rf): implement Random Forest classifier comparison benchmark
+- **[2026-06-23T20:07:26]** feat(resnet): integrate ResNet-18 deep learning model for brain MRI scan analysis
+- **[2026-06-23T09:43:13]** fix(segmentation): resolve temporal lobe anomaly mask bounding box math
+- **[2026-06-23T18:35:19]** fix(segmentation): resolve temporal lobe anomaly mask bounding box math
+- **[2026-06-24T17:10:29]** feat(resnet): integrate ResNet-18 deep learning model for brain MRI scan analysis
+- **[2026-07-02T16:32:03]** feat(rf): implement Random Forest classifier comparison benchmark
+- **[2026-07-02T22:12:36]** feat(reports): add automated PDF diagnostic report generator with disclaimer
+- **[2026-07-03T17:59:32]** feat(opencv): build OpenCV image preprocessing and normalization pipeline
+- **[2026-07-04T16:32:57]** feat(rf): implement Random Forest classifier comparison benchmark
+- **[2026-07-04T20:21:52]** fix(segmentation): resolve temporal lobe anomaly mask bounding box math
+- **[2026-07-04T14:52:54]** refactor(fastapi): modularize FastAPI endpoints for multi-modality scan uploads
+- **[2026-07-05T15:51:21]** feat(resnet): integrate ResNet-18 deep learning model for brain MRI scan analysis
+- **[2026-07-08T22:18:03]** feat(resnet): integrate ResNet-18 deep learning model for brain MRI scan analysis
+- **[2026-07-09T09:05:20]** feat(resnet): integrate ResNet-18 deep learning model for brain MRI scan analysis
+- **[2026-07-09T12:21:36]** feat(reports): add automated PDF diagnostic report generator with disclaimer
+- **[2026-07-15T17:25:57]** docs(metrics): document model accuracy, specificity, and ROC AUC evaluation
+- **[2026-07-21T11:26:00]** feat(portal): build clinical patient records portal with diagnostic confidence
+- **[2026-07-30T22:17:41]** feat(reports): add automated PDF diagnostic report generator with disclaimer
+- **[2026-08-01T15:50:53]** docs(metrics): document model accuracy, specificity, and ROC AUC evaluation
+- **[2026-08-04T14:23:06]** test(validation): add model validation tests on MRI test dataset
+- **[2026-08-05T20:10:41]** feat(opencv): build OpenCV image preprocessing and normalization pipeline
+- **[2026-08-05T19:06:24]** style(dashboard): polish clinical dark/light diagnostic dashboard interface
+- **[2026-08-08T19:39:52]** feat(portal): build clinical patient records portal with diagnostic confidence
+- **[2026-08-12T15:12:31]** feat(opencv): build OpenCV image preprocessing and normalization pipeline
+- **[2026-08-12T14:44:28]** docs(metrics): document model accuracy, specificity, and ROC AUC evaluation
+- **[2026-08-14T17:10:10]** feat(portal): build clinical patient records portal with diagnostic confidence
+- **[2026-08-18T15:41:26]** feat(opencv): build OpenCV image preprocessing and normalization pipeline

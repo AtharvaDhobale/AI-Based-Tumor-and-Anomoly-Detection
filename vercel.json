@@ -1,27 +1,5 @@
 {
-  "version": 2,
-  "experimentalServices": {
-    "frontend": {
-      "root": "frontend",
-      "routePrefix": "/",
-      "framework": "vite"
-    },
-    "backend": {
-      "root": "api",
-      "routePrefix": "/api"
-    }
-  },
-  "env": {
-    "ENVIRONMENT": "@environment",
-    "DATABASE_URL": "@database_url",
-    "CORS_ORIGINS": "@cors_origins",
-    "JWT_SECRET": "@jwt_secret",
-    "LLM_API_KEY": "@llm_api_key"
-  },
-  "functions": {
-    "api/index.py": {
-      "runtime": "python3.11",
-      "maxDuration": 60
-    }
-  }
+  "buildCommand": "cd frontend && npm install && npm run build",
+  "outputDirectory": "frontend/dist",
+  "framework": "vite"
 }

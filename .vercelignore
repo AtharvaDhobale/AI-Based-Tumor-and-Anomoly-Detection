@@ -1,0 +1,16 @@
+﻿backend
+ai
+models
+datasets
+data
+venv
+.venv
+__pycache__
+*.pyc
+*.pt
+*.pth
+*.pkl
+*.h5
+*.joblib
+*.zip
+*.tar.gz
