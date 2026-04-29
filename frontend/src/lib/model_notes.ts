@@ -6,3 +6,4 @@
 // [2026-04-23T20:51:35] fix(segmentation): resolve temporal lobe anomaly mask bounding box math
 // [2026-04-24T20:40:09] fix(segmentation): resolve temporal lobe anomaly mask bounding box math
 // [2026-04-24T13:05:46] style(dashboard): polish clinical dark/light diagnostic dashboard interface
+// [2026-04-29T15:22:15] refactor(fastapi): modularize FastAPI endpoints for multi-modality scan uploads
