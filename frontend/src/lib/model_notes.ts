@@ -14,3 +14,4 @@
 // [2026-05-01T13:45:57] docs(metrics): document model accuracy, specificity, and ROC AUC evaluation
 // [2026-05-02T11:08:48] fix(segmentation): resolve temporal lobe anomaly mask bounding box math
 // [2026-05-04T13:50:22] docs(metrics): document model accuracy, specificity, and ROC AUC evaluation
+// [2026-05-05T19:43:45] feat(rf): implement Random Forest classifier comparison benchmark
