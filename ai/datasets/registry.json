@@ -1,0 +1,55 @@
+{
+  "sources": [
+    {
+      "id": "brats_official",
+      "name": "BraTS Official (CBICA/Synapse)",
+      "task": ["segmentation", "classification_support"],
+      "modality": ["MRI", "NIfTI"],
+      "license": "Challenge terms / dataset-specific",
+      "access": "registration_required",
+      "url": "https://www.synapse.org/brats2025",
+      "notes": "Primary benchmark for glioma segmentation. Use official split rules."
+    },
+    {
+      "id": "tcia_utsw_glioma",
+      "name": "TCIA UTSW-Glioma",
+      "task": ["segmentation", "radiogenomics", "classification"],
+      "modality": ["MRI", "NIfTI"],
+      "license": "CC BY 4.0",
+      "access": "public",
+      "url": "https://www.cancerimagingarchive.net/collection/utsw-glioma/",
+      "notes": "Large modern dataset with segmentations and molecular labels."
+    },
+    {
+      "id": "tcia_ucsf_pdgm",
+      "name": "TCIA UCSF-PDGM",
+      "task": ["segmentation", "classification"],
+      "modality": ["MRI", "NIfTI"],
+      "license": "CC BY 4.0",
+      "access": "public",
+      "url": "https://www.cancerimagingarchive.net/collection/ucsf-pdgm/",
+      "notes": "Pre-operative diffuse glioma with curated annotations."
+    },
+    {
+      "id": "tcia_brats_peds",
+      "name": "TCIA BraTS-PEDs",
+      "task": ["segmentation", "pediatric_modeling"],
+      "modality": ["MRI", "NIfTI"],
+      "license": "CC BY 4.0",
+      "access": "public",
+      "url": "https://www.cancerimagingarchive.net/collection/brats-peds/",
+      "notes": "Pediatric cases; keep separate from adult model unless explicitly intended."
+    },
+    {
+      "id": "figshare_brain_tumor",
+      "name": "Figshare Brain Tumor Dataset",
+      "task": ["classification_pretraining"],
+      "modality": ["MRI", "2D images"],
+      "license": "See source terms",
+      "access": "public",
+      "url": "https://figshare.com/articles/dataset/brain_tumor_dataset/1512427",
+      "notes": "Useful warm-start classification data, not enough alone for clinical-grade segmentation."
+    }
+  ]
+}
+

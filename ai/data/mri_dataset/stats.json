@@ -1,0 +1,6 @@
+{
+  "benign": 80,
+  "malignant": 80,
+  "total": 160,
+  "size": 256
+}

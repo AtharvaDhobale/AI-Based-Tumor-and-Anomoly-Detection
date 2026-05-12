@@ -1,0 +1,2 @@
+patient_id,filename,classification_label,severity_score,confidence,model_version
+P001,Screenshot 2025-03-05 103750.png,malignant,1.0,1.0,fallback-otsu
