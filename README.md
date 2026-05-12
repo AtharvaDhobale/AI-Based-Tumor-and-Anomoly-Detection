@@ -5,6 +5,12 @@ A web-based medical imaging system for MRI tumor detection and analysis.
 ## Project Overview
 
 This is a full-stack medical imaging application that helps doctors analyze MRI scans for tumor detection. The system includes user authentication, image upload capabilities, automated analysis, and report generation.
+Team-Atharva Dhobale
+Bibek Singh
+Dhruv khare
+Prathmesh Barse
+Mentor-
+Dr. Jagannath Nalavade
 
 ## Technology Stack
 
