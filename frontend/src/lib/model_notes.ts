@@ -18,3 +18,4 @@
 // [2026-05-05T21:40:28] fix(segmentation): resolve temporal lobe anomaly mask bounding box math
 // [2026-05-07T09:23:40] feat(reports): add automated PDF diagnostic report generator with disclaimer
 // [2026-05-07T14:46:45] feat(rf): implement Random Forest classifier comparison benchmark
+// [2026-05-14T17:28:48] test(validation): add model validation tests on MRI test dataset
