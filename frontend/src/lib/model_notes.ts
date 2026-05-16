@@ -20,3 +20,4 @@
 // [2026-05-07T14:46:45] feat(rf): implement Random Forest classifier comparison benchmark
 // [2026-05-14T17:28:48] test(validation): add model validation tests on MRI test dataset
 // [2026-05-15T22:20:20] fix(segmentation): resolve temporal lobe anomaly mask bounding box math
+// [2026-05-16T20:43:43] refactor(fastapi): modularize FastAPI endpoints for multi-modality scan uploads
