@@ -26,3 +26,4 @@
 // [2026-05-31T20:05:32] refactor(fastapi): modularize FastAPI endpoints for multi-modality scan uploads
 // [2026-05-31T18:02:58] test(validation): add model validation tests on MRI test dataset
 // [2026-06-01T22:01:03] feat(reports): add automated PDF diagnostic report generator with disclaimer
+// [2026-06-02T10:08:13] feat(portal): build clinical patient records portal with diagnostic confidence
