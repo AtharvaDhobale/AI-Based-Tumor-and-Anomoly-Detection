@@ -31,3 +31,4 @@
 // [2026-06-03T22:34:52] style(dashboard): polish clinical dark/light diagnostic dashboard interface
 // [2026-06-03T11:01:56] feat(resnet): integrate ResNet-18 deep learning model for brain MRI scan analysis
 // [2026-06-04T19:38:33] docs(metrics): document model accuracy, specificity, and ROC AUC evaluation
+// [2026-06-05T19:33:00] refactor(fastapi): modularize FastAPI endpoints for multi-modality scan uploads
