@@ -33,3 +33,4 @@
 // [2026-06-04T19:38:33] docs(metrics): document model accuracy, specificity, and ROC AUC evaluation
 // [2026-06-05T19:33:00] refactor(fastapi): modularize FastAPI endpoints for multi-modality scan uploads
 // [2026-06-08T12:05:30] docs(metrics): document model accuracy, specificity, and ROC AUC evaluation
+// [2026-06-08T17:47:05] test(validation): add model validation tests on MRI test dataset
