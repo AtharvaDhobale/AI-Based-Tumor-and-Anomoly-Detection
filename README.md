@@ -1,119 +1,156 @@
 # MRI Tumor Detection System
 
-A web-based medical imaging system for MRI tumor detection and analysis.
+## Overview
 
-## Project Overview
+MRI Tumor Detection System is a web-based application developed to assist in the analysis of MRI brain scans. The project combines machine learning and medical image processing techniques to identify potential tumor regions from uploaded MRI images and present the results through an easy-to-use web interface.
 
-This is a full-stack medical imaging application that helps doctors analyze MRI scans for tumor detection. The system includes user authentication, image upload capabilities, automated analysis, and report generation.
-Team-Atharva Dhobale
-Bibek Singh
-Dhruv khare
-Prathmesh Barse
-Mentor-
+This project was developed as part of an academic learning initiative to explore the practical application of Artificial Intelligence, Machine Learning, and Full Stack Development in the healthcare domain.
+
+## Team Members
+
+* Atharva Dhobale
+* Bibek Singh
+* Dhruv Khare
+* Prathmesh Barse
+
+### Project Mentor
+
 Dr. Jagannath Nalavade
+
+---
+
+## Objectives
+
+* Provide a simple interface for uploading MRI images.
+* Perform automated image analysis using machine learning techniques.
+* Store patient and analysis records securely.
+* Generate downloadable reports for future reference.
+* Demonstrate the integration of AI models with a modern web application.
+
+---
 
 ## Technology Stack
 
-- **Backend**: Python with FastAPI framework
-- **Database**: SQLite for data storage
-- **Frontend**: React with TypeScript and Vite
-- **Machine Learning**: Random Forest classifier with image processing features
+### Frontend
 
-## Features
+* React
+* TypeScript
+* Vite
 
-- Secure user authentication for medical professionals
-- MRI image upload and storage
-- Automated tumor detection analysis
-- Patient record management
-- Analysis report generation (PDF and CSV)
-- Interactive dashboard with patient statistics
+### Backend
 
-## Getting Started
+* Python
+* FastAPI
 
-### Prerequisites
+### Database
 
-- Python 3.8 or higher
-- Node.js 16 or higher
+* SQLite
 
-### Installation
+### Machine Learning
 
-1. Install backend dependencies:
-```bash
-cd backend
-pip install -r requirements.txt
-```
+* Image preprocessing using OpenCV
+* Feature extraction techniques
+* Random Forest Classifier for prediction
 
-2. Install frontend dependencies:
-```bash
-cd frontend
-npm install
-```
+---
 
-### Running the Application
+## Key Features
 
-1. Start the backend server:
-```bash
-cd backend
-python -m uvicorn app.main:app --reload --port 8000
-```
+### User Authentication
 
-2. In a new terminal, start the frontend:
-```bash
-cd frontend
-npm run dev
-```
+Secure registration and login functionality for authorized users.
 
-3. Open your browser and navigate to `http://localhost:5173`
+### MRI Image Upload
 
-### Demo Account
+Users can upload MRI scan images through the web interface.
 
-For testing purposes, you can create a new account:
-- Click the Register tab
-- Enter any email and password
-- Click Create account
+### Tumor Analysis
+
+The uploaded image is processed and analyzed using a machine learning model to predict the presence of abnormalities.
+
+### Patient Record Management
+
+Patient information and analysis history can be stored and accessed when required.
+
+### Report Generation
+
+Analysis results can be exported in PDF and CSV formats.
+
+### Dashboard
+
+Interactive dashboard displaying patient statistics and analysis summaries.
+
+---
 
 ## Project Structure
 
-```
+```text
 mri-ai-tumor-system/
-├── backend/          # FastAPI backend server
-├── ai/               # Image processing and ML modules
+│
+├── backend/          # FastAPI backend services
 ├── frontend/         # React frontend application
-├── db/               # Database schemas
-└── docs/             # API documentation
-```
-
-## Usage Instructions
-
-1. Register a new account or login with existing credentials
-2. Upload an MRI image using the upload interface
-3. Click "Run Analysis" to process the image
-4. View the results including detection result and confidence score
-5. Download reports as needed
-
-## System Requirements
-
-- Modern web browser (Chrome, Firefox, Edge)
-- Internet connection for initial setup
-- Local system storage for database
-
-## License
-
-This project is for educational and research purposes.
-
-### Frontend
-
-```bash
-cd frontend
-npm install
-npm run dev
+├── ai/               # ML and image processing modules
+├── db/               # Database files and schemas
+└── docs/             # Project documentation
 ```
 
 ---
 
-## Notes / safety
+## Installation
 
-- This is an **AI decision-support** system. Final diagnosis remains with licensed clinicians.
-- Always review uncertainty flags, anomaly indicators, and source evidence overlays before communicating outcomes.
-- MRI tumor detection is a regulated medical use-case; validate on clinical datasets and follow local regulations before deployment.
+### Backend Setup
 
+```bash
+cd backend
+pip install -r requirements.txt
+uvicorn app.main:app --reload --port 8000
+```
+
+### Frontend Setup
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+The application will be available at:
+
+```text
+http://localhost:5173
+```
+
+---
+
+## Workflow
+
+1. User logs into the system.
+2. MRI image is uploaded.
+3. The image undergoes preprocessing and feature extraction.
+4. The trained machine learning model performs analysis.
+5. Prediction results and confidence scores are displayed.
+6. Reports can be generated and downloaded.
+
+---
+
+## Educational Purpose
+
+This project was developed for educational and research purposes to understand the integration of machine learning models with web-based healthcare applications.
+
+The system is intended as a decision-support tool and should not be considered a substitute for professional medical diagnosis.
+
+---
+
+## Future Enhancements
+
+* Support for larger MRI datasets.
+* Integration of deep learning models such as CNNs.
+* Improved visualization of detected tumor regions.
+* Cloud-based deployment.
+* Enhanced reporting and analytics.
+
+---
+
+## License
+
+This project is intended for academic and educational use.
