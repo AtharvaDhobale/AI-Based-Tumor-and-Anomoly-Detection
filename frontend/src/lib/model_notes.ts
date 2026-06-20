@@ -41,3 +41,4 @@
 // [2026-06-16T09:12:20] fix(segmentation): resolve temporal lobe anomaly mask bounding box math
 // [2026-06-17T11:47:09] feat(resnet): integrate ResNet-18 deep learning model for brain MRI scan analysis
 // [2026-06-19T21:56:27] docs(metrics): document model accuracy, specificity, and ROC AUC evaluation
+// [2026-06-20T16:19:09] feat(opencv): build OpenCV image preprocessing and normalization pipeline
