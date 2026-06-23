@@ -43,3 +43,4 @@
 // [2026-06-19T21:56:27] docs(metrics): document model accuracy, specificity, and ROC AUC evaluation
 // [2026-06-20T16:19:09] feat(opencv): build OpenCV image preprocessing and normalization pipeline
 // [2026-06-23T14:04:41] docs(metrics): document model accuracy, specificity, and ROC AUC evaluation
+// [2026-06-23T18:51:20] fix(segmentation): resolve temporal lobe anomaly mask bounding box math
