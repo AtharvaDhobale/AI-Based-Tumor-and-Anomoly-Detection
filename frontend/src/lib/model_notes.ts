@@ -47,3 +47,4 @@
 // [2026-06-24T18:05:32] feat(opencv): build OpenCV image preprocessing and normalization pipeline
 // [2026-06-24T18:16:12] docs(metrics): document model accuracy, specificity, and ROC AUC evaluation
 // [2026-06-25T21:18:13] feat(rf): implement Random Forest classifier comparison benchmark
+// [2026-06-25T16:52:43] refactor(fastapi): modularize FastAPI endpoints for multi-modality scan uploads
