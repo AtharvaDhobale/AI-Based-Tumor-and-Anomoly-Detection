@@ -46,3 +46,4 @@
 // [2026-06-23T18:51:20] fix(segmentation): resolve temporal lobe anomaly mask bounding box math
 // [2026-06-24T18:05:32] feat(opencv): build OpenCV image preprocessing and normalization pipeline
 // [2026-06-24T18:16:12] docs(metrics): document model accuracy, specificity, and ROC AUC evaluation
+// [2026-06-25T21:18:13] feat(rf): implement Random Forest classifier comparison benchmark
