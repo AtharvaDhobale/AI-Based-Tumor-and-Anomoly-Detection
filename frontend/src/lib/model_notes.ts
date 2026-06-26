@@ -49,3 +49,4 @@
 // [2026-06-25T21:18:13] feat(rf): implement Random Forest classifier comparison benchmark
 // [2026-06-25T16:52:43] refactor(fastapi): modularize FastAPI endpoints for multi-modality scan uploads
 // [2026-06-26T22:43:27] test(validation): add model validation tests on MRI test dataset
+// [2026-06-26T17:03:02] docs(metrics): document model accuracy, specificity, and ROC AUC evaluation
