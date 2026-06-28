@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import sys
 from pathlib import Path
 
 import albumentations as A
@@ -13,7 +14,44 @@ from albumentations.pytorch import ToTensorV2
 from sklearn.metrics import accuracy_score, confusion_matrix, f1_score, precision_score, recall_score, roc_auc_score
 from torch.utils.data import DataLoader, Dataset
 
+REPO_ROOT = Path(__file__).resolve().parents[2]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
 from ai.models.classifier import ResNet18Classifier
+
+
+class FolderDataset(Dataset):
+    def __init__(self, root: str):
+        self.root = Path(root)
+        self.samples: list[tuple[str, int]] = []
+        for label_name, y in [("benign", 0), ("malignant", 1)]:
+            label_dir = self.root / label_name
+            if not label_dir.exists():
+                continue
+            for p in sorted(label_dir.glob("*")):
+                if p.is_file() and p.suffix.lower() in {".png", ".jpg", ".jpeg"}:
+                    self.samples.append((str(p), y))
+        if not self.samples:
+            raise RuntimeError(f"No image files found under {self.root}")
+        self.transform = A.Compose(
+            [
+                A.Normalize(mean=(0.5,), std=(0.5,), max_pixel_value=255.0),
+                ToTensorV2(transpose_mask=False),
+            ]
+        )
+
+    def __len__(self) -> int:
+        return len(self.samples)
+
+    def __getitem__(self, idx: int):
+        path, y = self.samples[idx]
+        img = cv2.imread(path, cv2.IMREAD_GRAYSCALE)
+        if img is None:
+            raise RuntimeError(f"Could not read image: {path}")
+        img = cv2.resize(img, (256, 256))
+        x = self.transform(image=img)["image"]
+        return x, y
 
 
 class EvalCSVDataset(Dataset):
@@ -45,12 +83,18 @@ class EvalCSVDataset(Dataset):
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--weights", default="ai/weights/classifier.pt")
-    ap.add_argument("--test_csv", required=True)
+    ap.add_argument("--test_csv", default="")
+    ap.add_argument("--test_dir", default="")
     ap.add_argument("--out", default="ai/weights/classifier_eval.json")
     ap.add_argument("--batch_size", type=int, default=16)
     args = ap.parse_args()
 
-    ds = EvalCSVDataset(args.test_csv)
+    if args.test_dir:
+        ds = FolderDataset(args.test_dir)
+    elif args.test_csv:
+        ds = EvalCSVDataset(args.test_csv)
+    else:
+        raise ValueError("Provide either --test_dir or --test_csv")
     loader = DataLoader(ds, batch_size=args.batch_size, shuffle=False, num_workers=0)
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 

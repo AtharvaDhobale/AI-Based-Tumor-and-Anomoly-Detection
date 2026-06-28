@@ -45,8 +45,7 @@ class SegFolderDataset(Dataset):
 
         aug = self.transform(image=img, mask=msk)
         x = aug["image"]  # 1xHxW
-        y = (aug["mask"] > 127).astype(np.float32)[None, ...]
-        y = torch.from_numpy(y)
+        y = (aug["mask"] > 127).float().unsqueeze(0)
         return x, y
 
 
@@ -76,8 +75,8 @@ class SegCSVDataset(Dataset):
         msk = cv2.resize(msk, (256, 256), interpolation=cv2.INTER_NEAREST)
         aug = self.transform(image=img, mask=msk)
         x = aug["image"]
-        y = (aug["mask"] > 127).astype(np.float32)[None, ...]
-        return x, torch.from_numpy(y)
+        y = (aug["mask"] > 127).float().unsqueeze(0)
+        return x, y
 
 
 def dice_loss(logits: torch.Tensor, targets: torch.Tensor, eps: float = 1e-6) -> torch.Tensor:

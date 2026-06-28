@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import sys
 from pathlib import Path
 
 import albumentations as A
@@ -15,26 +16,59 @@ from sklearn.model_selection import train_test_split
 from torch.utils.data import DataLoader, Dataset
 from tqdm import tqdm
 
+REPO_ROOT = Path(__file__).resolve().parents[2]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
 from ai.models.classifier import ResNet18Classifier
 
 
 class FolderDataset(Dataset):
-    """Simple folder dataset:
+    """Folder dataset supporting either:
 
     data/
       benign/*.png
       malignant/*.png
+
+    or a richer split layout:
+
+    data/
+      train/benign/*.png
+      train/malignant/*.png
+      val/benign/*.png
+      val/malignant/*.png
+      test/benign/*.png
+      test/malignant/*.png
     """
 
-    def __init__(self, root: str, transform: A.Compose):
+    def __init__(self, root: str, split: str, transform: A.Compose):
         self.root = Path(root)
+        self.split = split
         self.transform = transform
         self.samples: list[tuple[str, int]] = []
-        for label_name, y in [("benign", 0), ("malignant", 1)]:
-            for p in (self.root / label_name).glob("*.png"):
-                self.samples.append((str(p), y))
+
+        search_roots = []
+        split_root = self.root / split
+        if split_root.exists() and (split_root / "benign").exists() and (split_root / "malignant").exists():
+            search_roots.append(split_root)
+        elif self.root.exists() and (self.root / "benign").exists() and (self.root / "malignant").exists():
+            search_roots.append(self.root)
+        else:
+            search_roots.append(self.root)
+
+        for base in search_roots:
+            for label_name, y in [("benign", 0), ("malignant", 1)]:
+                label_dir = base / label_name
+                if not label_dir.exists():
+                    continue
+                for p in sorted(label_dir.glob("*")):
+                    if p.is_file() and p.suffix.lower() in {".png", ".jpg", ".jpeg"}:
+                        self.samples.append((str(p), y))
+
         if not self.samples:
-            raise RuntimeError(f"No samples found under {self.root}. Expected benign/ and malignant/ with PNG images.")
+            raise RuntimeError(
+                f"No samples found under {self.root}. Expected benign/ and malignant/ folders or train/val/test split folders."
+            )
 
     def __len__(self):
         return len(self.samples)
@@ -111,14 +145,15 @@ def _eval_metrics(model: torch.nn.Module, loader: DataLoader, device: torch.devi
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--data_dir", default="ai/data/classification", help="Folder containing benign/ malignant/")
-    ap.add_argument("--epochs", type=int, default=5)
+    ap.add_argument("--data_dir", default="ai/data/augmented_mri", help="Folder containing benign/ malignant/ or split folders train/val/test")
+    ap.add_argument("--epochs", type=int, default=10)
     ap.add_argument("--batch_size", type=int, default=16)
-    ap.add_argument("--lr", type=float, default=2e-4)
+    ap.add_argument("--lr", type=float, default=1e-4)
     ap.add_argument("--out", default="ai/weights/classifier.pt")
     ap.add_argument("--train_csv", default="", help="Optional split CSV with columns: image_path,label")
     ap.add_argument("--val_csv", default="", help="Optional split CSV with columns: image_path,label")
     ap.add_argument("--metrics_out", default="ai/weights/classifier_metrics.json")
+    ap.add_argument("--split", default="train", choices=["train", "val", "test"], help="Which split to use when data_dir contains train/val/test folders")
     args = ap.parse_args()
 
     tfm = A.Compose(
@@ -135,11 +170,14 @@ def main():
         train_ds = CSVDataset(args.train_csv, transform=tfm)
         val_ds = CSVDataset(args.val_csv, transform=tfm)
     else:
-        ds = FolderDataset(args.data_dir, transform=tfm)
-        idx = np.arange(len(ds))
-        train_idx, val_idx = train_test_split(idx, test_size=0.2, random_state=42, stratify=[ds.samples[i][1] for i in idx])
-        train_ds = torch.utils.data.Subset(ds, train_idx.tolist())
-        val_ds = torch.utils.data.Subset(ds, val_idx.tolist())
+        train_ds = FolderDataset(args.data_dir, split="train", transform=tfm)
+        val_ds = FolderDataset(args.data_dir, split="val", transform=tfm)
+        if len(val_ds) == 0:
+            ds = FolderDataset(args.data_dir, split="train", transform=tfm)
+            idx = np.arange(len(ds))
+            train_idx, val_idx = train_test_split(idx, test_size=0.2, random_state=42, stratify=[ds.samples[i][1] for i in idx])
+            train_ds = torch.utils.data.Subset(ds, train_idx.tolist())
+            val_ds = torch.utils.data.Subset(ds, val_idx.tolist())
 
     train_loader = DataLoader(train_ds, batch_size=args.batch_size, shuffle=True, num_workers=0)
     val_loader = DataLoader(val_ds, batch_size=args.batch_size, shuffle=False, num_workers=0)
