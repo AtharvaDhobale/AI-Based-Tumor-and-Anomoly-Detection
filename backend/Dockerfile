@@ -15,11 +15,14 @@ ENV PATH="/root/.cargo/bin:${PATH}"
 WORKDIR /app
 
 # Install Python dependencies first (copy only requirements to leverage Docker cache)
-COPY backend/requirements.txt ./requirements.txt
+# When Render builds with rootDir=backend the build context is the backend folder,
+# so copy paths should be relative to that context.
+COPY requirements.txt ./requirements.txt
 RUN pip install --upgrade pip setuptools wheel && pip install --prefer-binary -r requirements.txt
 
 # Copy application code
-COPY backend /app
+# Use the current build context (backend) as the source.
+COPY . /app
 
 EXPOSE 10000
 
