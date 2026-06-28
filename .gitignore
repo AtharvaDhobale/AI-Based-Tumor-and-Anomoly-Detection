@@ -10,6 +10,16 @@ backend/.env
 
 node_modules/
 frontend/dist/
+frontend/tsconfig.tsbuildinfo
 
 db_data/
+backend/mri_ai.db
 
+# Generated training data (large, reproducible via pipeline)
+ai/data/augmented_mri/
+ai/data/brats/
+ai/data/classification/
+ai/data/segmentation/
+
+# Temporary build artifacts
+frontend/src/utils.css
