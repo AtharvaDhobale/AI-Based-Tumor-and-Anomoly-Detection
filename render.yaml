@@ -2,14 +2,15 @@ services:
   - type: web
     name: mri-ai-backend
     env: python
+    runtime: python3.11
     branch: main
     rootDir: backend
-    buildCommand: pip install --upgrade pip setuptools wheel && pip install --prefer-binary -r requirements.txt
-    startCommand: uvicorn app.main:app --host 0.0.0.0 --port 10000
+    buildCommand: CARGO_HOME=/tmp/cargo PIP_CACHE_DIR=/tmp/pip-cache pip install --upgrade pip setuptools wheel && CARGO_HOME=/tmp/cargo PIP_CACHE_DIR=/tmp/pip-cache pip install --prefer-binary -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
 
   - type: static_site
     name: mri-ai-frontend
-    branch: master
+    branch: main
     rootDir: frontend
     buildCommand: npm install && npm run build
     publishDir: dist

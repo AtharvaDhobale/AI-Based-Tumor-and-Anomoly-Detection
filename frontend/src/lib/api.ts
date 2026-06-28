@@ -104,7 +104,7 @@ export type AssistantAgentResponse = {
   llm: { enabled: boolean; model: string | null; summary_text: string };
 };
 
-const API_BASE = import.meta.env.VITE_API_BASE_URL ?? "";
+const API_BASE = import.meta.env.VITE_API_BASE_URL ?? "http://127.0.0.1:10000";
 
 function authHeaders(token: string | null): HeadersInit {
   return token ? { Authorization: `Bearer ${token}` } : {};
