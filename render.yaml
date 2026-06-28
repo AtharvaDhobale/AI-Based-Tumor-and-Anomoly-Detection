@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: mri-ai-backend
+    env: docker
+    branch: master
+    rootDir: backend
+    dockerfilePath: Dockerfile
+
+  - type: static_site
+    name: mri-ai-frontend
+    branch: master
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    publishDir: dist
