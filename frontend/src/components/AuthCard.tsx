@@ -32,120 +32,114 @@ export default function AuthCard({ token, onToken }: Props) {
   }
 
   return (
-    <div className="auth-card animate-in">
-      <div className="auth-card-header">
-        <div className="auth-card-logo">🏥</div>
-        <div className="auth-card-title">NeuraScan MD</div>
-        <div className="auth-card-sub">AI-powered clinical imaging system</div>
-      </div>
+    <div className="ehr-portal-centered clinic-fade-in-up">
+      <div className="ehr-portal-card">
+        <div className="ehr-portal-header">
+          <div className="ehr-portal-logo">🏥</div>
+          <div className="ehr-portal-title">NeuraScan MD Portal</div>
+          <div className="ehr-portal-sub">Secure Hospital Authentication</div>
+        </div>
 
-      <div className="auth-card-body">
-        {token ? (
-          <>
-            <div className="auth-user-block">
-              <div className="auth-avatar">Dr</div>
-              <div>
-                <div style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)" }}>
-                  Authenticated
+        <div className="ehr-portal-body">
+          {token ? (
+            <div className="grid-gap-20">
+              <div className="flex-center gap-3" style={{ padding: "12px 16px", backgroundColor: "var(--bg-accent)", borderRadius: "var(--radius-md)", border: "1px solid var(--border-subtle)" }}>
+                <div className="user-avatar">DR</div>
+                <div style={{ flex: 1 }}>
+                  <div className="user-info-name">Clinical Session Active</div>
+                  <div className="user-info-role">Hospital Physician Access</div>
                 </div>
-                <div className="text-muted mt-2" style={{ marginTop: 2 }}>
-                  Session active
-                </div>
+                <span className="pill-clinical success">
+                  <span className="pulse-bullet"></span> Active
+                </span>
               </div>
-              <div className="flex-center gap-2" style={{ marginLeft: "auto" }}>
-                <span className="dot dot-green pulse"></span>
-                <span className="badge badge-green">Online</span>
-              </div>
-            </div>
-            <button className="btn btn-danger btn-full" onClick={() => onToken(null)}>
-              <span>⎋</span> Sign Out
-            </button>
-          </>
-        ) : (
-          <>
-            <div className="auth-tabs">
-              <button
-                className={`auth-tab ${mode === "login" ? "active" : ""}`}
-                onClick={() => { setMode("login"); setError(null); }}
-              >
-                Sign In
-              </button>
-              <button
-                className={`auth-tab ${mode === "register" ? "active" : ""}`}
-                onClick={() => { setMode("register"); setError(null); }}
-              >
-                Register
+              <button id="auth-logout-btn" className="btn-clinical danger" style={{ width: "100%" }} onClick={() => onToken(null)}>
+                Sign Out / Disconnect Session
               </button>
             </div>
-
-            <form onSubmit={submit}>
-              <div className="form-group">
-                <label className="form-label">Email Address</label>
-                <input
-                  id="auth-email"
-                  className="form-input"
-                  type="email"
-                  placeholder="doctor@hospital.org"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  autoComplete="email"
-                />
+          ) : (
+            <>
+              <div className="auth-tabs">
+                <button
+                  id="tab-mode-login"
+                  className={`auth-tab ${mode === "login" ? "active" : ""}`}
+                  onClick={() => { setMode("login"); setError(null); }}
+                >
+                  Clinical Sign In
+                </button>
+                <button
+                  id="tab-mode-register"
+                  className={`auth-tab ${mode === "register" ? "active" : ""}`}
+                  onClick={() => { setMode("register"); setError(null); }}
+                >
+                  Register Account
+                </button>
               </div>
 
-              {mode === "register" && (
+              <form onSubmit={submit} className="grid-gap-20">
                 <div className="form-group">
-                  <label className="form-label">Full Name</label>
+                  <label className="form-label">Hospital Email Address</label>
                   <input
-                    id="auth-name"
-                    className="form-input"
-                    type="text"
-                    placeholder="Dr. Jane Smith"
-                    value={fullName}
-                    onChange={(e) => setFullName(e.target.value)}
+                    id="auth-email"
+                    className="form-input-field"
+                    type="email"
+                    placeholder="doctor@hospital.org"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     required
+                    autoComplete="email"
                   />
                 </div>
-              )}
 
-              <div className="form-group">
-                <label className="form-label">Password</label>
-                <input
-                  id="auth-password"
-                  className="form-input"
-                  type="password"
-                  placeholder="••••••••"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                  autoComplete={mode === "login" ? "current-password" : "new-password"}
-                />
-              </div>
-
-              {error && (
-                <div className="alert alert-red mb-4">
-                  <span>⚠</span>
-                  <span>{error}</span>
-                </div>
-              )}
-
-              <button id="auth-submit" className="btn btn-primary btn-full" disabled={loading}>
-                {loading ? (
-                  <><span className="spinner spinner-sm"></span> Processing...</>
-                ) : mode === "login" ? (
-                  <><span>→</span> Sign In</>
-                ) : (
-                  <><span>✓</span> Create Account</>
+                {mode === "register" && (
+                  <div className="form-group">
+                    <label className="form-label">Full Name & Credentials</label>
+                    <input
+                      id="auth-name"
+                      className="form-input-field"
+                      type="text"
+                      placeholder="Dr. Jane Smith, MD"
+                      value={fullName}
+                      onChange={(e) => setFullName(e.target.value)}
+                      required
+                    />
+                  </div>
                 )}
-              </button>
-            </form>
 
-            <div className="divider"></div>
-            <p className="text-muted" style={{ textAlign: "center", fontSize: 12 }}>
-              Demo: Register with any email, then upload a brain MRI PNG/JPG to run AI analysis.
-            </p>
-          </>
-        )}
+                <div className="form-group">
+                  <label className="form-label">Secure Access Key (Password)</label>
+                  <input
+                    id="auth-password"
+                    className="form-input-field"
+                    type="password"
+                    placeholder="••••••••"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                    autoComplete={mode === "login" ? "current-password" : "new-password"}
+                  />
+                </div>
+
+                {error && (
+                  <div className="alert alert-red" style={{ margin: "4px 0" }}>
+                    <span>⚠</span>
+                    <span>{error}</span>
+                  </div>
+                )}
+
+                <button id="auth-submit-btn" className="btn-clinical primary" style={{ width: "100%", marginTop: 8 }} disabled={loading}>
+                  {loading ? (
+                    <><span className="clinical-spinner" style={{ width: 14, height: 14, borderWidth: 2, marginRight: 8 }}></span> Verifying...</>
+                  ) : mode === "login" ? (
+                    "Authorize Credentials"
+                  ) : (
+                    "Complete Registration"
+                  )}
+                </button>
+              </form>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );

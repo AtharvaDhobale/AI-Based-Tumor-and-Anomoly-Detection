@@ -8,7 +8,7 @@ echo.
 cd /d "%~dp0"
 
 echo [1/3] Starting Backend (port 8000)...
-start "Backend Server" cmd /k "cd /d "%~dp0backend" && call .venv\Scripts\Activate && uvicorn app.main:app --reload --port 8000"
+start "Backend Server" cmd /k "cd /d "%~dp0backend" && call ..\.venv\Scripts\Activate && uvicorn app.main:app --reload --port 8000"
 
 timeout /t 3 /nobreak >nul
 
@@ -18,7 +18,7 @@ start "Frontend" cmd /k "cd /d "%~dp0frontend" && npm run dev"
 timeout /t 3 /nobreak >nul
 
 echo [3/3] Starting AI Service (port 8001)...
-start "AI Service" cmd /k "cd /d "%~dp0ai" && call .venv\Scripts\Activate && python service.py"
+start "AI Service" cmd /k "cd /d "%~dp0ai" && call ..\.venv\Scripts\Activate && python service.py"
 
 echo.
 echo ========================================

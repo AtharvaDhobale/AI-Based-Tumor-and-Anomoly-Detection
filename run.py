@@ -54,7 +54,7 @@ def main():
     
     # 1. Backend
     print(f"{GREEN}[1/3]{RESET} Starting Backend (port 8000)...")
-    backend_cmd = r".\.venv\Scripts\Activate && uvicorn app.main:app --reload --port 8000"
+    backend_cmd = r"..\.venv\Scripts\Activate && uvicorn app.main:app --reload --port 8000"
     backend_process = subprocess.Popen(
         f"cmd /k \"cd /d \"{base_dir}\\backend\" && {backend_cmd}\"",
         shell=True,
@@ -76,7 +76,7 @@ def main():
     
     # 3. AI Service
     print(f"{GREEN}[3/3]{RESET} Starting AI Service (port 8001)...")
-    ai_cmd = r".\.venv\Scripts\Activate && python service.py"
+    ai_cmd = r"..\.venv\Scripts\Activate && python service.py"
     ai_process = subprocess.Popen(
         f"cmd /k \"cd /d \"{base_dir}\\ai\" && {ai_cmd}\"",
         shell=True,

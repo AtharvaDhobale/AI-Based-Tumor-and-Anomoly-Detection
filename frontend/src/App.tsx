@@ -18,316 +18,268 @@ export default function App() {
     } catch { /* ignore */ }
   }
 
+  // EHR clinical dashboard mocked statistics
   const stats = [
-    { icon: "👥", label: "Total Patients",   val: "156", color: "blue"   },
-    { icon: "🔬", label: "Analyzed Today",   val: "12",  color: "green"  },
-    { icon: "⏳", label: "Pending Review",   val: "5",   color: "yellow" },
-    { icon: "🚨", label: "Critical Cases",   val: "2",   color: "red"    },
+    { icon: "👥", label: "Patient Records", val: "1,248", color: "primary" },
+    { icon: "🔬", label: "Scans Analyzed",  val: "412",   color: "success" },
+    { icon: "⏳", label: "Pending Sign-off", val: "7",     color: "warning" },
+    { icon: "🚨", label: "Critical Alerts", val: "2",     color: "critical" }
   ];
 
-  const activity = [
-    { color: "green",  text: "P015 — Brain MRI analyzed. Result: Normal.", time: "10:30 AM" },
-    { color: "yellow", text: "P012 — Lab report uploaded, extraction pending.", time: "09:45 AM" },
-    { color: "red",    text: "P008 — Spine MRI flagged. Expert review needed.", time: "09:15 AM" },
-    { color: "blue",   text: "P003 — Follow-up imaging scheduled.", time: "Yesterday" },
-    { color: "green",  text: "P011 — Breast MRI: No anomaly detected.", time: "Yesterday" },
+  const recentTimeline = [
+    { type: "success", text: "Patient ID P015 - Brain MRI scan analysis complete (Normal).", time: "10:30 AM" },
+    { type: "warning", text: "Patient ID P012 - Hematology Lab Report parsed (biomarkers flagged).", time: "09:45 AM" },
+    { type: "critical", text: "Patient ID P008 - Spine MRI anomaly detected (severe compression).", time: "09:15 AM" },
+    { type: "info", text: "System - AI Model Classifier v1.0.4 loaded successfully.", time: "Yesterday" }
   ];
 
-  const models = [
-    { name: "Brain Tumor Segmenter",   version: "v1.0  (BraTS)",  status: "ok"      },
-    { name: "MRI Classifier (ResNet18)", version: "v1.0  (BraTS)", status: "ok"      },
-    { name: "Pelvis Cancer Detector",  version: "v0.8",            status: "warning" },
-    { name: "Breast MRI Screener",     version: "v0.9",            status: "ok"      },
+  const modelInventory = [
+    { name: "Brain Tumor Segmenter (U-Net)", ver: "v1.0 (BraTS)", status: "normal" },
+    { name: "MRI Classifier (ResNet18)", ver: "v1.0 (BraTS)", status: "normal" },
+    { name: "Pelvis Cancer Screener", ver: "v0.9 (Calibrating)", status: "warning" },
+    { name: "Spine Disc Analyzer", ver: "v0.8 (Alpha)", status: "warning" }
   ];
 
-  const patients = [
-    { id: "P015", date: "Today 10:30", modality: "Brain MRI",  result: "Normal",   status: "ok" },
-    { id: "P012", date: "Today 09:45", modality: "Lab Report", result: "Pending",  status: "warning" },
-    { id: "P008", date: "Today 09:15", modality: "Spine MRI",  result: "Abnormal", status: "red" },
-    { id: "P003", date: "Yesterday",   modality: "Breast MRI", result: "Follow-up",status: "blue" },
-    { id: "P001", date: "Jun 26",      modality: "Brain MRI",  result: "Normal",   status: "ok" },
+  const patientRegistry = [
+    { mrn: "MRN-9201", name: "Sarah Connor", age: 34, sex: "Female", scan: "Brain MRI", result: "Normal", status: "success" },
+    { mrn: "MRN-1823", name: "Bruce Wayne", age: 42, sex: "Male", scan: "Spine MRI", result: "Abnormal", status: "critical" },
+    { mrn: "MRN-4890", name: "Clark Kent", age: 30, sex: "Male", scan: "Brain MRI", result: "Normal", status: "success" },
+    { mrn: "MRN-0391", name: "Peter Parker", age: 22, sex: "Male", scan: "Lab Report", result: "Pending", status: "warning" },
+    { mrn: "MRN-7734", name: "Selina Kyle", age: 29, sex: "Female", scan: "Breast MRI", result: "Normal", status: "success" }
   ];
 
-  const badgeForStatus = (s: string) => {
-    if (s === "ok")      return <span className="badge badge-green">Completed</span>;
-    if (s === "warning") return <span className="badge badge-yellow">Processing</span>;
-    if (s === "red")     return <span className="badge badge-red">Critical</span>;
-    if (s === "blue")    return <span className="badge badge-blue">Scheduled</span>;
-    return <span className="badge badge-muted">{s}</span>;
+  const getPill = (status: string, text: string) => {
+    return (
+      <span className={`pill-clinical ${status}`}>
+        <span className="pulse-bullet"></span> {text}
+      </span>
+    );
   };
 
   return (
-    <div className="app-shell">
-      {/* ── Top Navigation ── */}
-      <nav className="topnav">
-        <div className="topnav-brand">
-          <div className="topnav-logo">🧠</div>
-          <div>
-            <div className="topnav-title">NeuraScan MD</div>
-            <div className="topnav-subtitle">AI Clinical Imaging</div>
+    <div className={token ? "app-container" : ""}>
+      {/* ── Side Bar (Visible only when authenticated) ── */}
+      {token && (
+        <aside className="app-sidebar">
+          <div className="sidebar-logo">
+            <div className="logo-badge">🏥</div>
+            <div>
+              <div className="logo-text-title">NeuraScan MD</div>
+              <div className="logo-text-sub">EHR Workstation</div>
+            </div>
           </div>
-        </div>
 
-        {token && (
-          <div className="topnav-center">
+          <ul className="sidebar-menu">
             {[
-              { key: "upload",    label: "Upload & Analysis", icon: "⬆" },
-              { key: "dashboard", label: "Dashboard",         icon: "◫" },
-              { key: "patients",  label: "Patients",          icon: "👤" },
-            ].map(({ key, label, icon }) => (
-              <button
-                key={key}
-                id={`tab-${key}`}
-                className={`topnav-tab ${activeTab === key ? "active" : ""}`}
-                onClick={() => setActiveTab(key as typeof activeTab)}
-              >
-                <span>{icon}</span> {label}
-              </button>
+              { id: "upload", label: "Diagnostic Workspace", icon: "🛰️" },
+              { id: "dashboard", label: "Clinical Analytics", icon: "◫" },
+              { id: "patients", label: "Patient Registry", icon: "👥" }
+            ].map(item => (
+              <li key={item.id}>
+                <button
+                  id={`nav-tab-${item.id}`}
+                  className={`menu-item-btn ${activeTab === item.id ? "active" : ""}`}
+                  onClick={() => setActiveTab(item.id as typeof activeTab)}
+                >
+                  <span style={{ fontSize: 16 }}>{item.icon}</span>
+                  {item.label}
+                </button>
+              </li>
             ))}
-          </div>
-        )}
+          </ul>
 
-        <div className="topnav-right">
-          {token ? (
-            <>
-              <span className="flex-center gap-2">
-                <span className="dot dot-green pulse"></span>
-                <span className="text-muted text-sm">System Online</span>
+          <div className="sidebar-user">
+            <div className="user-avatar">Dr</div>
+            <div style={{ flex: 1 }}>
+              <div className="user-info-name">Dr. Atharva Dhobale</div>
+              <div className="user-info-role">Hospital Physician</div>
+            </div>
+            <button
+              className="btn-clinical ghost btn-sm"
+              onClick={() => onToken(null)}
+              title="Sign Out"
+              style={{ padding: 4 }}
+            >
+              🚪
+            </button>
+          </div>
+        </aside>
+      )}
+
+      {/* ── Main Workspace ── */}
+      {token ? (
+        <div className="app-workspace">
+          {/* Header */}
+          <header className="workspace-header">
+            <div>
+              <h1 className="header-title-main">
+                {activeTab === "upload" && "Diagnostic Workspace"}
+                {activeTab === "dashboard" && "Clinical Analytics Dashboard"}
+                {activeTab === "patients" && "EHR Patient Registry"}
+              </h1>
+              <div className="header-title-sub">
+                {activeTab === "upload" && "Run AI diagnostic inference & generate physician sign-off reports"}
+                {activeTab === "dashboard" && "Hospital-wide patient stats, alert tracking & AI service telemetry"}
+                {activeTab === "patients" && "Browse, search, and register patient medical histories"}
+              </div>
+            </div>
+
+            <div className="header-controls">
+              <span className="pill-clinical success">
+                <span className="pulse-bullet"></span> PACS Server Online
               </span>
-              <span className="badge badge-green">Authenticated</span>
-            </>
-          ) : (
-            <span className="badge badge-yellow">Not Signed In</span>
+              <span className="text-muted text-xs">v1.0.4-release</span>
+            </div>
+          </header>
+
+          {/* ── Tab: Workspace / Scan Analysis ── */}
+          {activeTab === "upload" && (
+            <UploadDetectCard token={token} />
           )}
-        </div>
-      </nav>
 
-      {/* ── Page Content ── */}
-      <main className="page-content">
-
-        {/* Stat banner (logged in only) */}
-        {token && (
-          <div className="stat-banner">
-            {stats.map((s) => (
-              <div className="stat-card animate-in" key={s.label}>
-                <div className={`stat-icon ${s.color}`}>{s.icon}</div>
-                <div>
-                  <div className={`stat-val ${s.color}`}>{s.val}</div>
-                  <div className="stat-label">{s.label}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-
-        {/* ── UPLOAD TAB ── */}
-        {(!token || activeTab === "upload") && (
-          <div className="main-grid">
-            <AuthCard token={token} onToken={onToken} />
-            {token ? (
-              <UploadDetectCard token={token} />
-            ) : (
-              <div className="card animate-in">
-                <div className="card-header">
-                  <div className="card-title">
-                    <div className="card-title-icon">🔒</div>
-                    Clinical Analysis
-                  </div>
-                </div>
-                <div className="card-body">
-                  <div className="loading-box">
-                    <div style={{ fontSize: 48 }}>🏥</div>
-                    <div style={{ fontWeight: 600, fontSize: 16, color: "var(--text-primary)" }}>
-                      Sign in to access the system
-                    </div>
-                    <div className="text-muted" style={{ textAlign: "center", maxWidth: 300 }}>
-                      Upload MRI scans, run AI detection, and generate clinical reports.
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-        )}
-
-        {/* ── DASHBOARD TAB ── */}
-        {token && activeTab === "dashboard" && (
-          <div className="dash-grid animate-in">
-
-            {/* Recent Activity */}
-            <div className="card">
-              <div className="card-header">
-                <div className="card-title">
-                  <div className="card-title-icon">📋</div>
-                  Recent Activity
-                </div>
-              </div>
-              <div className="card-body">
-                <div className="activity-feed">
-                  {activity.map((a, i) => (
-                    <div className="activity-item" key={i}>
-                      <div className={`activity-dot dot-${a.color}`}></div>
-                      <div className="activity-content">
-                        <div className="activity-text">{a.text}</div>
-                        <div className="activity-time">{a.time}</div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Quick Actions */}
-            <div className="card">
-              <div className="card-header">
-                <div className="card-title">
-                  <div className="card-title-icon">⚡</div>
-                  Quick Actions
-                </div>
-              </div>
-              <div className="card-body">
-                <div className="quick-actions">
-                  {[
-                    { icon: "🔍", label: "Search Patient", bg: "blue-bg" },
-                    { icon: "📄", label: "Generate Report", bg: "blue-bg" },
-                    { icon: "📅", label: "View Schedule", bg: "blue-bg" },
-                    { icon: "⚙", label: "Model Settings", bg: "blue-bg" },
-                    { icon: "📊", label: "Analytics", bg: "blue-bg" },
-                    { icon: "🔔", label: "Alerts (2)", bg: "blue-bg" },
-                  ].map((a) => (
-                    <button key={a.label} className="quick-action-btn">
-                      <div className="quick-action-icon">{a.icon}</div>
-                      {a.label}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* AI Model Status */}
-            <div className="card">
-              <div className="card-header">
-                <div className="card-title">
-                  <div className="card-title-icon">🤖</div>
-                  AI Model Status
-                </div>
-              </div>
-              <div className="card-body">
-                {models.map((m) => (
-                  <div className="model-status-item" key={m.name}>
+          {/* ── Tab: Clinical Analytics ── */}
+          {activeTab === "dashboard" && (
+            <div className="clinic-fade-in-up">
+              {/* Stats Bar */}
+              <div className="stats-container">
+                {stats.map(s => (
+                  <div key={s.label} className="stat-metric-card">
                     <div>
-                      <div className="model-name">{m.name}</div>
-                      <div className="model-version">{m.version}</div>
+                      <div className="stat-metric-value">{s.val}</div>
+                      <div className="stat-metric-label">{s.label}</div>
                     </div>
-                    {m.status === "ok" ? (
-                      <span className="badge badge-green">
-                        <span className="dot dot-green"></span> Trained
-                      </span>
-                    ) : (
-                      <span className="badge badge-yellow">
-                        <span className="dot dot-yellow"></span> Calibrating
-                      </span>
-                    )}
+                    <div className={`stat-metric-icon ${s.color}`}>{s.icon}</div>
                   </div>
                 ))}
               </div>
-            </div>
 
-            {/* Alerts */}
-            <div className="card">
-              <div className="card-header">
-                <div className="card-title">
-                  <div className="card-title-icon">🚨</div>
-                  Clinical Alerts
+              {/* Charts & Timeline Layout */}
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
+                {/* AI Timeline Feed */}
+                <div className="card-clinical">
+                  <div className="card-clinical-header">
+                    <h2 className="card-clinical-title"><span>📋</span> Realtime Clinical Activity Feed</h2>
+                  </div>
+                  <div className="card-clinical-body">
+                    <div className="clinical-timeline">
+                      {recentTimeline.map((item, idx) => (
+                        <div key={idx} className="timeline-event-item">
+                          <div className={`timeline-event-marker ${item.type}`}></div>
+                          <div>
+                            <div className="timeline-event-desc">{item.text}</div>
+                            <div className="timeline-event-timestamp">{item.time}</div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* AI Service Inventory */}
+                <div className="card-clinical">
+                  <div className="card-clinical-header">
+                    <h2 className="card-clinical-title"><span>🤖</span> AI Diagnostic Modality Telemetry</h2>
+                  </div>
+                  <div className="card-clinical-body no-padding">
+                    <table className="clinical-registry-table">
+                      <thead>
+                        <tr>
+                          <th>Model Modality</th>
+                          <th>Engine Version</th>
+                          <th>Telemetry Status</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {modelInventory.map(m => (
+                          <tr key={m.name}>
+                            <td style={{ fontWeight: 600 }}>{m.name}</td>
+                            <td className="font-mono text-muted">{m.ver}</td>
+                            <td>
+                              {m.status === "normal"
+                                ? getPill("success", "Active & Calibrated")
+                                : getPill("warning", "In Calibration")
+                              }
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
-              <div className="card-body" style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-                <div className="alert alert-red">
-                  <span>🔴</span>
-                  <span>2 critical cases require <strong>immediate</strong> specialist review.</span>
+
+              {/* Warning center */}
+              <div className="card-clinical">
+                <div className="card-clinical-header">
+                  <h2 className="card-clinical-title"><span>🚨</span> Hospital Alert Warning Center</h2>
                 </div>
-                <div className="alert alert-yellow">
-                  <span>🟡</span>
-                  <span>5 results pending expert radiologist sign-off.</span>
-                </div>
-                <div className="alert alert-blue">
-                  <span>ℹ</span>
-                  <span>Model update available — Segmenter v1.1 ready to deploy.</span>
-                </div>
-                <div className="alert alert-green">
-                  <span>✓</span>
-                  <span>System health: All services running normally.</span>
+                <div className="card-clinical-body" style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+                  <div className="risk-notification-panel critical">
+                    <div className="risk-panel-icon">🔴</div>
+                    <div>
+                      <div className="risk-panel-title">Critical Diagnostic Escalations</div>
+                      <div className="risk-panel-desc">2 patients (Bruce Wayne, Clark Kent) present severe MRI anomalies. Specialist review is required immediately.</div>
+                    </div>
+                  </div>
+                  <div className="risk-notification-panel warning">
+                    <div className="risk-panel-icon">🟡</div>
+                    <div>
+                      <div className="risk-panel-title">Pending Radiologist Verification</div>
+                      <div className="risk-panel-desc">5 scans are fully analyzed by the AI pipeline and waiting for radiologist approval.</div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
+          )}
 
-          </div>
-        )}
-
-        {/* ── PATIENTS TAB ── */}
-        {token && activeTab === "patients" && (
-          <div className="card animate-in">
-            <div className="card-header" style={{ paddingBottom: 16 }}>
-              <div className="card-title">
-                <div className="card-title-icon">👥</div>
-                Patient Registry
+          {/* ── Tab: Patient Registry ── */}
+          {activeTab === "patients" && (
+            <div className="card-clinical clinic-fade-in-up">
+              <div className="card-clinical-header">
+                <h2 className="card-clinical-title"><span>👥</span> EHR Patient Registry Search</h2>
+                <button className="btn-clinical primary btn-sm">+ Add New Record</button>
               </div>
-              <button className="btn btn-primary btn-sm">+ New Patient</button>
-            </div>
-            <div className="card-body flush">
-              <table className="patient-table">
-                <thead>
-                  <tr>
-                    <th>Patient ID</th>
-                    <th>Last Scan</th>
-                    <th>Modality</th>
-                    <th>AI Result</th>
-                    <th>Status</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {patients.map((p) => (
-                    <tr key={p.id}>
-                      <td>
-                        <span style={{ fontWeight: 600, fontFamily: "JetBrains Mono, monospace" }}>{p.id}</span>
-                      </td>
-                      <td className="text-muted">{p.date}</td>
-                      <td>{p.modality}</td>
-                      <td style={{ fontWeight: 500 }}>{p.result}</td>
-                      <td>{badgeForStatus(p.status)}</td>
-                      <td>
-                        <button className="btn btn-ghost btn-sm">View →</button>
-                      </td>
+              <div className="card-clinical-body no-padding">
+                <table className="clinical-registry-table">
+                  <thead>
+                    <tr>
+                      <th>Patient MRN</th>
+                      <th>Patient Name</th>
+                      <th>Age / Sex</th>
+                      <th>Active Scan</th>
+                      <th>Inference Result</th>
+                      <th>EHR Status</th>
+                      <th>Actions</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {patientRegistry.map(p => (
+                      <tr key={p.mrn}>
+                        <td className="font-mono" style={{ fontWeight: 600 }}>{p.mrn}</td>
+                        <td style={{ fontWeight: 600 }}>{p.name}</td>
+                        <td className="text-secondary">{p.age} Y / {p.sex}</td>
+                        <td>{p.scan}</td>
+                        <td>{p.result}</td>
+                        <td>
+                          {p.status === "success" && getPill("success", "Archived")}
+                          {p.status === "critical" && getPill("critical", "Flagged")}
+                          {p.status === "warning" && getPill("warning", "Reviewing")}
+                        </td>
+                        <td>
+                          <button className="btn-clinical ghost btn-sm">Open File →</button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
-          </div>
-        )}
-
-      </main>
-
-      {/* Footer */}
-      <footer style={{
-        borderTop: "1px solid var(--border)",
-        padding: "14px 28px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        fontSize: 12,
-        color: "var(--text-muted)"
-      }}>
-        <span>NeuraScan MD — AI Clinical Imaging System</span>
-        <span style={{ display: "flex", gap: 16 }}>
-          <span>Backend: localhost:8000</span>
-          <span>AI Model: v1.0 (BraTS)</span>
-          <span className="badge badge-green" style={{ fontSize: 11 }}>
-            <span className="dot dot-green"></span> System Online
-          </span>
-        </span>
-      </footer>
+          )}
+        </div>
+      ) : (
+        <AuthCard token={token} onToken={onToken} />
+      )}
     </div>
   );
 }
