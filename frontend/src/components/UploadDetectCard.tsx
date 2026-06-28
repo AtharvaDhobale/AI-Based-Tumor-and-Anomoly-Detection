@@ -234,71 +234,64 @@ export default function UploadDetectCard({ token }: Props) {
         <>
           <div style={{ height: 14 }} />
           <div className="row">
-            <div className={`pill ${result.classification_label === "malignant" ? "bad" : "ok"}`}>
+            <div className={`pill ${result.classification_label === "malignant" ? "danger" : "ok"}`}>
               Label: {result.classification_label}
             </div>
             <div className="pill">Confidence: {(result.confidence * 100).toFixed(1)}%</div>
             <div className="pill">Severity: {(result.severity_score * 100).toFixed(1)}%</div>
-            {result.is_uncertain && <div className="pill bad">Uncertain - Expert review needed</div>}
+            {result.is_uncertain && <div className="pill warning">Uncertain - Expert review needed</div>}
           </div>
 
           {(() => {
             const metrics = extractClinicalMetrics(result);
             return (
-              <div className="clinicalReport">
-                <h3>Clinical AI Report</h3>
-                <div className="reportGrid">
-                  <div className="reportSection">
-                    <h4>Risk Stratification</h4>
-                    <div className="row">
-                      <span className={`pill ${result.classification_label === "malignant" ? "bad" : "ok"}`}>
+              <div className="resultCard">
+                <h3 className="resultTitle">Clinical AI Report</h3>
+                <div className="metricGrid">
+                  <div className="metricItem" style={{ gridColumn: "1 / -1" }}>
+                    <div className="metricLabel">Risk Stratification</div>
+                    <div className="row" style={{ marginTop: 8 }}>
+                      <span className={`pill ${result.classification_label === "malignant" ? "danger" : "ok"}`}>
                         Primary Suggestion: {result.classification_label}
                       </span>
-                      <span className={`pill ${metrics.riskBand === "Critical" || metrics.riskBand === "High" ? "bad" : "ok"}`}>
+                      <span className={`pill ${metrics.riskBand === "Critical" || metrics.riskBand === "High" ? "danger" : "ok"}`}>
                         Risk Band: {metrics.riskBand}
                       </span>
                     </div>
-                    <div className="muted" style={{ marginTop: 8 }}>
+                    <div className="metricLabel" style={{ marginTop: 8 }}>
                       {metrics.anomalySummary}
                     </div>
                   </div>
 
-                  <div className="reportSection">
-                    <h4>Classification Probabilities</h4>
-                    <div className="metricBar">
-                      <div className="metricLabel"><span>Malignant</span><span>{toPercent(metrics.probs.malignant)}</span></div>
-                      <div className="meter"><div className="fill bad" style={{ width: `${metrics.probs.malignant * 100}%` }} /></div>
-                    </div>
-                    <div className="metricBar">
-                      <div className="metricLabel"><span>Benign</span><span>{toPercent(metrics.probs.benign)}</span></div>
-                      <div className="meter"><div className="fill ok" style={{ width: `${metrics.probs.benign * 100}%` }} /></div>
+                  <div className="metricItem">
+                    <div className="metricLabel">Classification Probabilities</div>
+                    <div className="metricValue" style={{ marginTop: 8 }}>
+                      <div className="row">
+                        <span className="pill danger">Malignant: {toPercent(metrics.probs.malignant)}</span>
+                        <span className="pill ok">Benign: {toPercent(metrics.probs.benign)}</span>
+                      </div>
                     </div>
                   </div>
 
-                  <div className="reportSection">
-                    <h4>Anomaly Burden & Edges</h4>
-                    <div className="metricBar">
-                      <div className="metricLabel"><span>Anomaly Area Ratio</span><span>{toPercent(metrics.areaRatio)}</span></div>
-                      <div className="meter"><div className="fill warn" style={{ width: `${metrics.areaRatio * 100}%` }} /></div>
-                    </div>
-                    <div className="metricBar">
-                      <div className="metricLabel"><span>Boundary Complexity</span><span>{toPercent(metrics.edgeDensity)}</span></div>
-                      <div className="meter"><div className="fill warn" style={{ width: `${metrics.edgeDensity * 100}%` }} /></div>
-                    </div>
-                    <div className="metricBar">
-                      <div className="metricLabel"><span>Potential Spread Risk</span><span>{toPercent(metrics.spreadRisk)}</span></div>
-                      <div className="meter"><div className="fill bad" style={{ width: `${metrics.spreadRisk * 100}%` }} /></div>
+                  <div className="metricItem">
+                    <div className="metricLabel">Anomaly Burden & Edges</div>
+                    <div className="metricValue" style={{ marginTop: 8 }}>
+                      <div className="row">
+                        <span className="pill warning">Area: {toPercent(metrics.areaRatio)}</span>
+                        <span className="pill warning">Edges: {toPercent(metrics.edgeDensity)}</span>
+                        <span className="pill danger">Spread: {toPercent(metrics.spreadRisk)}</span>
+                      </div>
                     </div>
                   </div>
 
-                  <div className="reportSection">
-                    <h4>Impression & Recommendations</h4>
-                    <ul className="reportList">
+                  <div className="metricItem" style={{ gridColumn: "1 / -1" }}>
+                    <div className="metricLabel">Impression & Recommendations</div>
+                    <ul style={{ margin: "8px 0", paddingLeft: 20, fontSize: 13, color: "var(--text-secondary)" }}>
                       <li>Cross-check AI overlay with radiology sequence context before final sign-off.</li>
                       <li>If risk band is High/Critical, prioritize specialist review and follow-up imaging.</li>
                       <li>Use downloadable PDF/CSV as part of patient record documentation.</li>
                     </ul>
-                    <div className="muted">
+                    <div className="metricLabel">
                       Model Version: {String((result.output_json as Record<string, unknown>).model_version ?? "n/a")}
                     </div>
                   </div>
@@ -320,21 +313,21 @@ export default function UploadDetectCard({ token }: Props) {
       )}
 
       {dashboard && (
-        <div className="clinicalReport">
-          <h3>Doctor Overview Dashboard</h3>
-          <div className="reportGrid">
-            <div className="reportSection">
-              <h4>Patient Profile</h4>
-              <div className="muted">ID: {String(dashboard.patient_id)}</div>
-              <div className="muted">Age: {String((dashboard.patient_profile as Record<string, unknown>).age ?? "n/a")}</div>
-              <div className="muted">Sex: {String((dashboard.patient_profile as Record<string, unknown>).sex ?? "n/a")}</div>
-              <div className="muted">Source Lab: {String((dashboard.patient_profile as Record<string, unknown>).source_lab ?? "n/a")}</div>
+        <div className="resultCard">
+          <h3 className="resultTitle">Doctor Overview Dashboard</h3>
+          <div className="metricGrid">
+            <div className="metricItem">
+              <div className="metricLabel">Patient Profile</div>
+              <div className="metricValue">ID: {String(dashboard.patient_id)}</div>
+              <div className="metricValue">Age: {String((dashboard.patient_profile as Record<string, unknown>).age ?? "n/a")}</div>
+              <div className="metricValue">Sex: {String((dashboard.patient_profile as Record<string, unknown>).sex ?? "n/a")}</div>
+              <div className="metricValue">Source Lab: {String((dashboard.patient_profile as Record<string, unknown>).source_lab ?? "n/a")}</div>
             </div>
-            <div className="reportSection">
-              <h4>Latest AI Findings</h4>
-              <div className="muted">Classification: {String((dashboard.latest_result as Record<string, unknown>).classification_label ?? "n/a")}</div>
-              <div className="muted">Confidence: {String((dashboard.latest_result as Record<string, unknown>).confidence ?? "n/a")}</div>
-              <div className="muted">Severity: {String((dashboard.latest_result as Record<string, unknown>).severity_score ?? "n/a")}</div>
+            <div className="metricItem">
+              <div className="metricLabel">Latest AI Findings</div>
+              <div className="metricValue">Classification: {String((dashboard.latest_result as Record<string, unknown>).classification_label ?? "n/a")}</div>
+              <div className="metricValue">Confidence: {String((dashboard.latest_result as Record<string, unknown>).confidence ?? "n/a")}</div>
+              <div className="metricValue">Severity: {String((dashboard.latest_result as Record<string, unknown>).severity_score ?? "n/a")}</div>
               {(() => {
                 const ms = (((dashboard.latest_result as Record<string, unknown>).output_json as Record<string, unknown>)?.mask_stats as Record<string, unknown>) ?? {};
                 const region = String((ms as Record<string, unknown>)?.region ?? "n/a");
@@ -343,21 +336,21 @@ export default function UploadDetectCard({ token }: Props) {
                 const areaMm2 = String((ms as Record<string, unknown>)?.area_mm2_proxy ?? "n/a");
                 return (
                   <>
-                    <div className="muted">Region: {region}</div>
-                    <div className="muted">Diameter (mm proxy): {diam}</div>
-                    <div className="muted">Area: {areaPx} px | {areaMm2} mm² (proxy)</div>
+                    <div className="metricValue">Region: {region}</div>
+                    <div className="metricValue">Diameter (mm proxy): {diam}</div>
+                    <div className="metricValue">Area: {areaPx} px | {areaMm2} mm² (proxy)</div>
                   </>
                 );
               })()}
-              <div className="muted">Uploads: {dashboard.upload_count}</div>
+              <div className="metricValue">Uploads: {dashboard.upload_count}</div>
             </div>
-            <div className="reportSection">
-              <h4>Lab Report Extraction</h4>
+            <div className="metricItem" style={{ gridColumn: "1 / -1" }}>
+              <div className="metricLabel">Lab Report Extraction</div>
               {dashboard.lab_reports.length === 0 ? (
-                <div className="muted">No parsed lab reports yet.</div>
+                <div className="metricValue" style={{ color: "var(--text-muted)" }}>No parsed lab reports yet.</div>
               ) : (
                 dashboard.lab_reports.slice(0, 3).map((r, idx) => (
-                  <div key={idx} className="muted">
+                  <div key={idx} className="metricValue" style={{ color: "var(--text-secondary)" }}>
                     {String((r.source_filename as string) ?? "report")} | confidence {String(r.extraction_confidence ?? "n/a")}
                   </div>
                 ))
@@ -368,25 +361,29 @@ export default function UploadDetectCard({ token }: Props) {
       )}
 
       {assistantSummary && (
-        <div className="clinicalReport assistantPanel">
-          <h3>AI Clinical Assistant</h3>
+        <div className="resultCard">
+          <h3 className="resultTitle">AI Clinical Assistant</h3>
           <div className="row">
-            <span className={`pill ${assistantSummary.tumor_present ? "bad" : "ok"}`}>
+            <span className={`pill ${assistantSummary.tumor_present ? "danger" : "ok"}`}>
               Tumor Signal: {assistantSummary.tumor_present ? "Suspicious/Present" : "Low"}
             </span>
-            <span className={`pill ${assistantSummary.risk_level === "critical" || assistantSummary.risk_level === "high" ? "bad" : "ok"}`}>
+            <span className={`pill ${assistantSummary.risk_level === "critical" || assistantSummary.risk_level === "high" ? "danger" : "ok"}`}>
               Risk: {assistantSummary.risk_level}
             </span>
           </div>
-          <pre className="assistantText">{assistantSummary.summary_text}</pre>
+          <pre style={{ whiteSpace: "pre-wrap", fontSize: 13, color: "var(--text-secondary)", marginTop: 12 }}>
+            {assistantSummary.summary_text}
+          </pre>
         </div>
       )}
 
       {assistantAgent?.llm?.enabled && assistantAgent.llm.summary_text && (
-        <div className="clinicalReport assistantPanel">
-          <h3>AI Agent (LLM Summary)</h3>
-          <div className="muted">Model: {String(assistantAgent.llm.model ?? "n/a")}</div>
-          <pre className="assistantText">{assistantAgent.llm.summary_text}</pre>
+        <div className="resultCard">
+          <h3 className="resultTitle">AI Agent (LLM Summary)</h3>
+          <div className="metricLabel">Model: {String(assistantAgent.llm.model ?? "n/a")}</div>
+          <pre style={{ whiteSpace: "pre-wrap", fontSize: 13, color: "var(--text-secondary)", marginTop: 12 }}>
+            {assistantAgent.llm.summary_text}
+          </pre>
         </div>
       )}
 
