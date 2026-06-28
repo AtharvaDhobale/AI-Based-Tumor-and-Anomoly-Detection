@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: mri-ai-backend
+    env: python
+    branch: master
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: cd backend && uvicorn app.main:app --host 0.0.0.0 --port 10000
+
+  - type: static_site
+    name: mri-ai-frontend
+    branch: master
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    publishDir: dist
