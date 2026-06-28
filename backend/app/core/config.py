@@ -6,7 +6,7 @@ class Settings(BaseSettings):
 
     app_name: str = "MRI AI Tumor & Anomaly Detection API"
     environment: str = "dev"
-    cors_origins: str = "http://localhost:5173,http://localhost:5174,http://localhost:3000"
+    cors_origins: str = "http://localhost:5173,http://localhost:5174,http://localhost:5175,http://127.0.0.1:5175,http://localhost:3000"
 
     database_url: str = "sqlite:///./mri_ai.db"
 
