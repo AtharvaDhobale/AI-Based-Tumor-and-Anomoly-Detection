@@ -30,6 +30,8 @@ def generate_reports(
     output_json = result.get("output_json", {}) or {}
     mask_stats = output_json.get("mask_stats", {}) if isinstance(output_json, dict) else {}
     probs = output_json.get("classification_probs", {}) if isinstance(output_json, dict) else {}
+    quality = output_json.get("quality_metrics", {}) if isinstance(output_json, dict) else {}
+    consensus = output_json.get("model_consensus", {}) if isinstance(output_json, dict) else {}
 
     # CSV (flatten key summary)
     summary_row = {
@@ -54,6 +56,10 @@ def generate_reports(
         "tumor_centroid_xy": mask_stats.get("centroid_xy"),
         "tumor_bbox_xyxy": mask_stats.get("bbox_xyxy"),
         "anomaly_flags": result.get("anomaly_flags", {}),
+        "quality_std": quality.get("std"),
+        "quality_entropy": quality.get("entropy"),
+        "classifier_malignant_prob": consensus.get("classifier_malignant"),
+        "segmentation_malignant_vote": consensus.get("segmentation_malignant_vote"),
     }
     pd.DataFrame([summary_row]).to_csv(csv_path, index=False)
 
@@ -79,7 +85,7 @@ def generate_reports(
 
     excerpt = {
         k: output_json.get(k)
-        for k in ["classification_probs", "severity_score", "confidence", "mask_stats", "anomaly_flags", "note"]
+        for k in ["classification_probs", "severity_score", "confidence", "mask_stats", "anomaly_flags", "quality_metrics", "model_consensus", "note"]
     }
     lines = str(excerpt).splitlines() or [str(excerpt)]
     for line in lines:
