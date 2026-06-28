@@ -6,55 +6,55 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 :root {
-  /* Premium Hospital Theme Colors */
-  --bg-app: #080d19;         /* Deep hospital dark base */
-  --bg-sidebar: #0b1325;     /* Sidebar contrast */
-  --bg-card: #111c34;        /* EHR card background */
-  --bg-input: #172442;       /* Form input field */
-  --bg-hover: #1c2b4f;       /* Hover states */
-  --bg-accent: #0f1e36;      /* Accent backgrounds */
+  /* Hospital-themed light palette */
+  --bg-app: #eef6ef;
+  --bg-sidebar: #ffffff;
+  --bg-card: #ffffff;
+  --bg-input: #f7fbf7;
+  --bg-hover: #e8f3e7;
+  --bg-accent: #dff2db;
   
   /* Clinical Status Dyes */
-  --color-primary: #0ea5e9;  /* Medical Sky Blue */
-  --color-primary-hover: #38bdf8;
-  --color-teal: #0d9488;     /* Healing Teal */
-  --color-teal-hover: #14b8a6;
+  --color-primary: #047857;  /* Deep medical green */
+  --color-primary-hover: #059669;
+  --color-teal: #047857;
+  --color-teal-hover: #16a34a;
   
-  --status-normal: #10b981;  /* Healthy green */
-  --status-normal-bg: rgba(16, 185, 129, 0.08);
-  --status-normal-border: rgba(16, 185, 129, 0.2);
+  --status-normal: #16a34a;
+  --status-normal-bg: rgba(22, 163, 74, 0.12);
+  --status-normal-border: rgba(22, 163, 74, 0.25);
   
-  --status-warning: #f59e0b; /* Attention yellow */
-  --status-warning-bg: rgba(245, 158, 11, 0.08);
+  --status-warning: #f59e0b;
+  --status-warning-bg: rgba(245, 158, 11, 0.12);
   --status-warning-border: rgba(245, 158, 11, 0.2);
   
-  --status-critical: #ef4444; /* Critical red */
-  --status-critical-bg: rgba(239, 68, 68, 0.08);
-  --status-critical-border: rgba(239, 68, 68, 0.2);
+  --status-critical: #dc2626;
+  --status-critical-bg: rgba(220, 38, 38, 0.12);
+  --status-critical-border: rgba(220, 38, 38, 0.2);
   
-  --status-info: #3b82f6;     /* Informational blue */
-  --status-info-bg: rgba(59, 130, 246, 0.08);
-  --status-info-border: rgba(59, 130, 246, 0.2);
+  --status-info: #0f766e;
+  --status-info-bg: rgba(15, 118, 110, 0.12);
+  --status-info-border: rgba(15, 118, 110, 0.2);
 
   /* Typography Colors */
-  --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
   --text-muted: #64748b;
-  --text-dark: #1e293b;
+  --text-dark: #0f172a;
   
   /* Borders and Dividers */
-  --border-subtle: rgba(255, 255, 255, 0.06);
-  --border-medium: rgba(255, 255, 255, 0.12);
+  --border-subtle: rgba(15, 23, 42, 0.08);
+  --border-medium: rgba(15, 23, 42, 0.14);
   --border-focus: var(--color-primary);
 
   /* Design Tokens */
   --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
-  --radius-xl: 16px;
+  --radius-md: 10px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
   
-  --shadow-card: 0 4px 20px 0 rgba(0, 0, 0, 0.4);
-  --shadow-glow: 0 0 15px 0 rgba(14, 165, 233, 0.25);
+  --shadow-card: 0 12px 30px rgba(15, 23, 42, 0.08);
+  --shadow-glow: 0 0 20px rgba(4, 120, 87, 0.15);
   --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -102,7 +102,7 @@ button, input, select, textarea {
   height: 100vh;
   position: sticky;
   top: 0;
-  padding: 24px 16px;
+  padding: 32px 22px;
   z-index: 10;
 }
 
@@ -117,16 +117,16 @@ button, input, select, textarea {
 .sidebar-logo {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 32px;
+  gap: 14px;
+  margin-bottom: 30px;
   padding: 0 8px;
 }
 
 .logo-badge {
-  width: 40px;
-  height: 40px;
-  background: linear-gradient(135deg, var(--color-primary), var(--color-teal));
-  border-radius: var(--radius-lg);
+  width: 44px;
+  height: 44px;
+  background: var(--color-primary);
+  border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -160,32 +160,32 @@ button, input, select, textarea {
 
 .menu-item-btn {
   width: 100%;
-  padding: 12px 14px;
-  border-radius: var(--radius-md);
-  border: none;
-  background: transparent;
+  padding: 14px 16px;
+  border-radius: var(--radius-lg);
+  border: 1px solid transparent;
+  background: var(--bg-input);
   text-align: left;
   display: flex;
   align-items: center;
   gap: 12px;
   font-size: 14px;
-  font-weight: 500;
-  color: var(--text-secondary);
+  font-weight: 600;
+  color: var(--text-primary);
   cursor: pointer;
   transition: var(--transition);
 }
 
 .menu-item-btn:hover {
-  background-color: var(--bg-hover);
+  background-color: #e6f4ec;
   color: var(--text-primary);
 }
 
 .menu-item-btn.active {
-  background-color: rgba(14, 165, 233, 0.1);
-  color: var(--color-primary-hover);
-  font-weight: 600;
-  border-left: 3px solid var(--color-primary);
-  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  background-color: rgba(4, 120, 87, 0.12);
+  color: var(--color-primary);
+  font-weight: 700;
+  border-left: 4px solid var(--color-primary);
+  border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
 }
 
 .sidebar-user {
@@ -315,7 +315,7 @@ button, input, select, textarea {
   font-size: 20px;
 }
 
-.stat-metric-icon.primary { background-color: rgba(14, 165, 233, 0.1); color: var(--color-primary); }
+.stat-metric-icon.primary { background-color: rgba(4, 120, 87, 0.12); color: var(--color-primary); }
 .stat-metric-icon.success { background-color: var(--status-normal-bg); color: var(--status-normal); }
 .stat-metric-icon.warning { background-color: var(--status-warning-bg); color: var(--status-warning); }
 .stat-metric-icon.critical { background-color: var(--status-critical-bg); color: var(--status-critical); }
@@ -416,37 +416,120 @@ button, input, select, textarea {
   box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.2);
 }
 
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+@media (max-width: 800px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.auth-tabs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.auth-tab {
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.auth-tab.active {
+  background-color: rgba(14, 165, 233, 0.12);
+  color: var(--text-primary);
+  border-color: var(--color-primary);
+}
+
+.alert {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  background-color: rgba(239, 68, 68, 0.08);
+  color: var(--status-critical);
+  border: 1px solid rgba(239, 68, 68, 0.15);
+}
+
+.text-xs {
+  font-size: 11px;
+}
+
+.text-muted {
+  color: var(--text-muted);
+}
+
+.font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.text-secondary {
+  color: var(--text-secondary);
+}
+
+.card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.mainCard {
+  padding: 24px;
+}
+
 /* ── Advanced Drag & Drop Upload Zone ───────────── */
 .clinical-upload-zone {
   border: 2px dashed var(--border-medium);
   border-radius: var(--radius-lg);
-  padding: 32px 16px;
+  padding: 32px 20px;
   text-align: center;
-  background-color: rgba(23, 36, 66, 0.4);
+  background-color: var(--bg-input);
   cursor: pointer;
   transition: var(--transition);
 }
 
 .clinical-upload-zone:hover, .clinical-upload-zone.drag-active {
   border-color: var(--color-primary);
-  background-color: rgba(14, 165, 233, 0.05);
+  background-color: var(--bg-hover);
 }
 
 .upload-icon-pulse {
-  font-size: 28px;
+  font-size: 32px;
   margin-bottom: 12px;
   color: var(--color-primary);
   display: inline-block;
 }
 
 .upload-primary-text {
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 4px;
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: var(--text-primary);
 }
 
 .upload-sub-text {
-  font-size: 11px;
+  font-size: 12px;
   color: var(--text-secondary);
 }
 
@@ -454,13 +537,13 @@ button, input, select, textarea {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background-color: var(--status-normal-bg);
-  border: 1px solid var(--status-normal-border);
-  color: var(--status-normal);
-  padding: 6px 12px;
+  background-color: rgba(220, 220, 220, 0.22);
+  border: 1px solid var(--border-medium);
+  color: var(--text-primary);
+  padding: 8px 14px;
   border-radius: 20px;
-  font-size: 12px;
-  font-weight: 500;
+  font-size: 13px;
+  font-weight: 600;
   margin-top: 12px;
 }
 
@@ -531,7 +614,7 @@ button, input, select, textarea {
 
 /* ── Clinical Diagnostic Report view ────────────── */
 .diagnostic-report-header {
-  background: linear-gradient(90deg, rgba(23, 36, 66, 0.6) 0%, transparent 100%);
+  background: var(--bg-input);
   padding: 20px 24px;
   border-bottom: 1px solid var(--border-subtle);
   display: flex;
@@ -674,7 +757,7 @@ button, input, select, textarea {
 .risk-notification-panel.critical { background-color: var(--status-critical-bg); border-color: var(--status-critical-border); color: #fca5a5; }
 .risk-notification-panel.warning { background-color: var(--status-warning-bg); border-color: var(--status-warning-border); color: #fde34d; }
 .risk-notification-panel.success { background-color: var(--status-normal-bg); border-color: var(--status-normal-border); color: #6ee7b7; }
-.risk-notification-panel.info { background-color: var(--status-info-bg); border-color: var(--status-info-border); color: #93c5fd; }
+.risk-notification-panel.info { background-color: var(--status-info-bg); border-color: var(--status-info-border); color: #0f766e; }
 
 .risk-panel-icon {
   font-size: 22px;
@@ -735,7 +818,7 @@ button, input, select, textarea {
 }
 
 .pacs-image-viewport {
-  background-color: #000;
+  background-color: #f8faf8;
   border: 1px solid var(--border-medium);
   border-radius: var(--radius-lg);
   aspect-ratio: 1;
@@ -938,11 +1021,11 @@ button, input, select, textarea {
 
 .ehr-portal-card {
   width: 100%;
-  max-width: 440px;
+  max-width: 480px;
   background-color: var(--bg-card);
-  border: 1px solid var(--border-medium);
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius-xl);
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  box-shadow: var(--shadow-card);
   overflow: hidden;
 }
 
@@ -982,4 +1065,89 @@ button, input, select, textarea {
 
 .ehr-portal-body {
   padding: 32px;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.muted {
+  color: var(--text-muted);
+}
+
+.auth-tabs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.auth-tab {
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.auth-tab.active {
+  background-color: rgba(14, 165, 233, 0.14);
+  color: var(--text-primary);
+  border-color: var(--color-primary);
+}
+
+.btn-sm {
+  padding: 8px 14px;
+  font-size: 12px;
+  border-radius: 10px;
+}
+
+.section-title {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.clinical-metric-grid {
+  border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+}
+
+.clinical-table-wrapper {
+  overflow-x: auto;
+}
+
+.patient-profile-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.patient-profile-item:last-child {
+  border-bottom: none;
 }

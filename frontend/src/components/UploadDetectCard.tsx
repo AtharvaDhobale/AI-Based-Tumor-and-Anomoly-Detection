@@ -18,6 +18,13 @@ import {
 type Props = { token: string };
 type ProbabilityMap = { benign: number; malignant: number };
 
+const SCAN_FILE_EXTENSIONS = [".png", ".jpg", ".jpeg", ".dcm", ".dicom"];
+
+function isScanFile(file: File): boolean {
+  const filename = file.name.toLowerCase();
+  return SCAN_FILE_EXTENSIONS.some(ext => filename.endsWith(ext)) || file.type.startsWith("image/");
+}
+
 function toPercent(v: number): string { return `${(v * 100).toFixed(1)}%`; }
 function clamp(v: number): number { return Math.max(0, Math.min(1, v)); }
 
@@ -227,7 +234,13 @@ export default function UploadDetectCard({ token }: Props) {
     e.stopPropagation();
     setDragActive(false);
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      setFile(e.dataTransfer.files[0]);
+      const incoming = e.dataTransfer.files[0];
+      if (!isScanFile(incoming)) {
+        setError("Scan upload accepts PNG, JPG, or DICOM files only. Use the lab report field for PDF/TXT.");
+        return;
+      }
+      setFile(incoming);
+      setError(null);
     }
   }
 
@@ -325,13 +338,21 @@ export default function UploadDetectCard({ token }: Props) {
                 <input
                   id="mri-file-input"
                   type="file"
-                  accept="image/*"
+                  accept="image/png,image/jpeg,.dcm,.dicom"
                   style={{ display: "none" }}
-                  onChange={(e) => setFile(e.target.files?.[0] ?? null)}
+                  onChange={(e) => {
+                    const selected = e.target.files?.[0] ?? null;
+                    if (selected && !isScanFile(selected)) {
+                      setError("Please select a valid scan file: PNG, JPG, or DICOM.");
+                      return;
+                    }
+                    setFile(selected);
+                    setError(null);
+                  }}
                 />
                 <span className="upload-icon-pulse">🧲</span>
-                <div className="upload-primary-text">Ingest MRI Image Slice</div>
-                <div className="upload-sub-text">Drag & drop PNG/JPG scan file here</div>
+                <div className="upload-primary-text">Upload MRI Scan</div>
+                <div className="upload-sub-text">PNG, JPG, JPEG, or DICOM accepted. Drag & drop or click to choose.</div>
                 {file && (
                   <div className="upload-file-status">
                     <span>✓</span> {file.name}

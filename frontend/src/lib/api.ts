@@ -104,12 +104,14 @@ export type AssistantAgentResponse = {
   llm: { enabled: boolean; model: string | null; summary_text: string };
 };
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL ?? "";
+
 function authHeaders(token: string | null): HeadersInit {
   return token ? { Authorization: `Bearer ${token}` } : {};
 }
 
 export async function apiLogin(email: string, password: string): Promise<TokenResponse> {
-  const res = await fetch("/api/auth/login", {
+  const res = await fetch(`${API_BASE}/api/auth/login`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password })
@@ -119,7 +121,7 @@ export async function apiLogin(email: string, password: string): Promise<TokenRe
 }
 
 export async function apiRegister(email: string, full_name: string, password: string): Promise<TokenResponse> {
-  const res = await fetch("/api/auth/register", {
+  const res = await fetch(`${API_BASE}/api/auth/register`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, full_name, password })
@@ -146,13 +148,13 @@ export async function apiUploadMRI(
   if (payload.clinicalNotes) fd.append("clinical_notes", payload.clinicalNotes);
   if (payload.sourceLab) fd.append("source_lab", payload.sourceLab);
   fd.append("file", payload.file);
-  const res = await fetch("/api/mri/upload", { method: "POST", headers: authHeaders(token), body: fd });
+  const res = await fetch(`${API_BASE}/api/mri/upload`, { method: "POST", headers: authHeaders(token), body: fd });
   if (!res.ok) throw new Error(await res.text());
   return res.json();
 }
 
 export async function apiDetect(token: string, uploadId: number): Promise<DetectionResponse> {
-  const res = await fetch(`/api/mri/detect/${uploadId}`, { method: "POST", headers: authHeaders(token) });
+  const res = await fetch(`${API_BASE}/api/mri/detect/${uploadId}`, { method: "POST", headers: authHeaders(token) });
   if (!res.ok) throw new Error(await res.text());
   return res.json();
 }
@@ -161,41 +163,40 @@ export async function apiUploadLabReport(token: string, patientId: string, file:
   const fd = new FormData();
   fd.append("patient_id", patientId);
   fd.append("file", file);
-  const res = await fetch("/api/mri/lab-report/upload", { method: "POST", headers: authHeaders(token), body: fd });
+  const res = await fetch(`${API_BASE}/api/mri/lab-report/upload`, { method: "POST", headers: authHeaders(token), body: fd });
   if (!res.ok) throw new Error(await res.text());
   return res.json();
 }
 
 export async function apiPatientDashboard(token: string, patientId: string): Promise<DashboardResponse> {
-  const res = await fetch(`/api/mri/dashboard/${encodeURIComponent(patientId)}`, { headers: authHeaders(token) });
+  const res = await fetch(`${API_BASE}/api/mri/dashboard/${encodeURIComponent(patientId)}`, { headers: authHeaders(token) });
   if (!res.ok) throw new Error(await res.text());
   return res.json();
 }
 
 export async function apiAssistantSummary(token: string, patientId: string): Promise<AssistantSummaryResponse> {
-  const res = await fetch(`/api/mri/assistant-summary/${encodeURIComponent(patientId)}`, { headers: authHeaders(token) });
+  const res = await fetch(`${API_BASE}/api/mri/assistant-summary/${encodeURIComponent(patientId)}`, { headers: authHeaders(token) });
   if (!res.ok) throw new Error(await res.text());
   return res.json();
 }
 
 export async function apiAssistantAgent(token: string, patientId: string): Promise<AssistantAgentResponse> {
-  const res = await fetch(`/api/mri/assistant-agent/${encodeURIComponent(patientId)}`, { headers: authHeaders(token) });
+  const res = await fetch(`${API_BASE}/api/mri/assistant-agent/${encodeURIComponent(patientId)}`, { headers: authHeaders(token) });
   if (!res.ok) throw new Error(await res.text());
   return res.json();
 }
 
 export function overlayUrl(path: string, token: string): string {
-  // token is sent by Authorization header; for <img> we must use a signed-ish URL.
-  // For demo, we fallback to a fetch->blob approach in component instead.
-  return path;
+  if (path.startsWith("http")) return path;
+  return `${API_BASE}${path}`;
 }
 
 export function reportPdfUrl(resultId: number): string {
-  return `/api/mri/report/pdf/${resultId}`;
+  return `${API_BASE}/api/mri/report/pdf/${resultId}`;
 }
 
 export function reportCsvUrl(resultId: number): string {
-  return `/api/mri/report/csv/${resultId}`;
+  return `${API_BASE}/api/mri/report/csv/${resultId}`;
 }
 
 export async function fetchAuthedBlob(url: string, token: string): Promise<Blob> {
