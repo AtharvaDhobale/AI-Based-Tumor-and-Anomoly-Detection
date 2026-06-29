@@ -1,0 +1,28 @@
+{
+  "version": 2,
+  "buildCommand": "cd frontend && npm install && npm run build",
+  "outputDirectory": "frontend/dist",
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/index.py"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
+  "env": {
+    "ENVIRONMENT": "@environment",
+    "DATABASE_URL": "@database_url",
+    "CORS_ORIGINS": "@cors_origins",
+    "JWT_SECRET": "@jwt_secret",
+    "LLM_API_KEY": "@llm_api_key"
+  },
+  "functions": {
+    "api/index.py": {
+      "runtime": "python3.11",
+      "maxDuration": 60
+    }
+  }
+}

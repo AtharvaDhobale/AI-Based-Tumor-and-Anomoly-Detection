@@ -1,0 +1,12 @@
+{
+  "name": "mri-ai-system",
+  "version": "1.0.0",
+  "description": "MRI Tumor Detection System",
+  "scripts": {
+    "build": "cd frontend && npm install && npm run build",
+    "dev": "concurrently \"cd frontend && npm run dev\" \"cd backend && uvicorn app.main:app --reload\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.0.0"
+  }
+}

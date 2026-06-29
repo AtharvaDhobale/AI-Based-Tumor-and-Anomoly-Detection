@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, pool
 from sqlalchemy.engine import Engine
 from sqlalchemy.orm import Session, sessionmaker
 
@@ -14,7 +14,16 @@ def get_engine() -> Engine:
     """Lazy engine creation (test-friendly)."""
     global _ENGINE
     if _ENGINE is None:
-        _ENGINE = create_engine(settings.database_url, pool_pre_ping=True)
+        # Use NullPool for serverless environments (Vercel)
+        if settings.environment == "production":
+            _ENGINE = create_engine(
+                settings.database_url,
+                poolclass=pool.NullPool,
+                pool_pre_ping=True,
+                connect_args={"connect_timeout": 10}
+            )
+        else:
+            _ENGINE = create_engine(settings.database_url, pool_pre_ping=True)
     return _ENGINE
 
 
