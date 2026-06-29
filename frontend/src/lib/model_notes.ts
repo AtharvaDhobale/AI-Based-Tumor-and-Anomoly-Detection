@@ -51,3 +51,4 @@
 // [2026-06-26T22:43:27] test(validation): add model validation tests on MRI test dataset
 // [2026-06-26T17:03:02] docs(metrics): document model accuracy, specificity, and ROC AUC evaluation
 // [2026-06-28T11:23:26] feat(portal): build clinical patient records portal with diagnostic confidence
+// [2026-06-29T19:01:18] refactor(fastapi): modularize FastAPI endpoints for multi-modality scan uploads
