@@ -54,3 +54,4 @@
 // [2026-06-29T19:01:18] refactor(fastapi): modularize FastAPI endpoints for multi-modality scan uploads
 // [2026-06-30T16:25:11] feat(reports): add automated PDF diagnostic report generator with disclaimer
 // [2026-07-01T16:28:17] feat(rf): implement Random Forest classifier comparison benchmark
+// [2026-07-01T17:16:55] feat(portal): build clinical patient records portal with diagnostic confidence
