@@ -33,6 +33,13 @@
 
 ---
 
+## ⚡ Quick Access for Recruiters & HR
+
+> 🔗 **Live Demo:** **[https://mri-frontend-production.up.railway.app](https://mri-frontend-production.up.railway.app)**  
+> 💡 *Authorized medical staff panel is live! Register a new account on the Sign Up page to upload scan reports and run the AI diagnostics immediately.*
+
+---
+
 ## 👥 Team
 
 | Name | Role |
