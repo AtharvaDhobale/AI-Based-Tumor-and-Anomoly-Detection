@@ -4,7 +4,7 @@
 <p><strong>MRI Brain Scan Analysis using Machine Learning — Upload, Analyze, Report</strong></p>
 
 <p>
-  <a href="https://postgres-production-6c3c.up.railway.app" target="_blank">
+  <a href="https://mri-frontend-production.up.railway.app" target="_blank">
     <img src="https://img.shields.io/badge/🚀 Live Demo-railway.app-6d28d9?style=for-the-badge&logoColor=white" alt="Live Demo" />
   </a>
   &nbsp;
@@ -27,7 +27,7 @@
 
 <br/>
 
-[🔴 Live App](https://postgres-production-6c3c.up.railway.app) &nbsp;•&nbsp; [📁 Source Code](https://github.com/AtharvaDhobale/AI-Based-Tumor-and-Anomoly-Detection) &nbsp;•&nbsp; [🐛 Report Bug](https://github.com/AtharvaDhobale/AI-Based-Tumor-and-Anomoly-Detection/issues)
+[🔴 Live App](https://mri-frontend-production.up.railway.app) &nbsp;•&nbsp; [📁 Source Code](https://github.com/AtharvaDhobale/AI-Based-Tumor-and-Anomoly-Detection) &nbsp;•&nbsp; [🐛 Report Bug](https://github.com/AtharvaDhobale/AI-Based-Tumor-and-Anomoly-Detection/issues)
 
 </div>
 
@@ -154,7 +154,7 @@ For academic and educational use. See [LICENSE](LICENSE) if present.
 <div align="center">
   <p>Built by <a href="https://github.com/AtharvaDhobale"><strong>Atharva Dhobale</strong></a> and team &nbsp;|&nbsp; B.Tech Final Year Project</p>
   <p>
-    <a href="https://postgres-production-6c3c.up.railway.app">🔴 Live Demo</a> &nbsp;•&nbsp;
+    <a href="https://mri-frontend-production.up.railway.app">🔴 Live Demo</a> &nbsp;•&nbsp;
     <a href="https://github.com/AtharvaDhobale/AI-Based-Tumor-and-Anomoly-Detection">⭐ Star on GitHub</a>
   </p>
 </div>
