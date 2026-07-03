@@ -151,6 +151,39 @@ The system is intended as a decision-support tool and should not be considered a
 
 ---
 
+## 📊 Model Performance & Metrics
+
+The system leverages and compares deep learning and machine learning models for classification, yielding high-accuracy predictions suitable for clinical decision support:
+
+### 🧠 Deep Learning Classifier (ResNet-18)
+* **Accuracy**: **93.75%**
+* **Precision**: **96.97%**
+* **Recall / Sensitivity**: **91.43%**
+* **Specificity**: **96.55%**
+* **F1 Score**: **94.12%**
+* **ROC AUC**: **97.54%**
+* **Error Analysis**: Achieved a low false positive rate (only 1 false positive out of evaluation samples).
+
+### 🌲 Machine Learning Classifier (Random Forest)
+* **Accuracy**: **87.50%**
+* **Precision**: **100.00%**
+* **Recall / Sensitivity**: **75.00%**
+* **Specificity**: **100.00%**
+* **F1 Score**: **85.71%**
+* **ROC AUC**: **89.58%**
+* **Error Analysis**: Zero false positives, ensuring high reliability for true negative scans.
+
+---
+
+## 🔑 ATS Keywords & Technical Core
+
+* **Artificial Intelligence & Machine Learning**: Deep Learning, Convolutional Neural Networks (CNN), ResNet-18, Random Forest Classifier, Feature Extraction, Model Evaluation, Classification Metrics (Precision, Recall, Specificity, F1-Score, ROC AUC), Image Segmentation
+* **Computer Vision**: OpenCV, Albumentations (Image Augmentation & Normalization), Gray-scale Processing
+* **Core Stack**: Python, PyTorch, Scikit-Learn, FastAPI, React.js, TypeScript, Vite, SQLite
+* **Features & Formatting**: REST API Design, Secure Authentication, Patient Record Management, PDF & CSV Report Generation, Full-Stack Integration
+
+---
+
 ## License
 
 This project is intended for academic and educational use.
