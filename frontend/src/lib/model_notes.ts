@@ -58,3 +58,4 @@
 // [2026-07-08T13:09:10] docs(metrics): document model accuracy, specificity, and ROC AUC evaluation
 // [2026-07-08T12:35:49] feat(resnet): integrate ResNet-18 deep learning model for brain MRI scan analysis
 // [2026-07-09T10:43:11] style(dashboard): polish clinical dark/light diagnostic dashboard interface
+// [2026-07-09T20:17:52] test(validation): add model validation tests on MRI test dataset
