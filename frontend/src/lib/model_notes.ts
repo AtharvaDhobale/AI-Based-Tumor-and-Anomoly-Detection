@@ -67,3 +67,4 @@
 // [2026-07-21T10:29:53] fix(segmentation): resolve temporal lobe anomaly mask bounding box math
 // [2026-07-23T17:36:39] refactor(fastapi): modularize FastAPI endpoints for multi-modality scan uploads
 // [2026-07-29T12:45:16] refactor(fastapi): modularize FastAPI endpoints for multi-modality scan uploads
+// [2026-07-30T10:32:45] fix(segmentation): resolve temporal lobe anomaly mask bounding box math
