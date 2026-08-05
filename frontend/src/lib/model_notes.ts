@@ -70,3 +70,4 @@
 // [2026-07-30T10:32:45] fix(segmentation): resolve temporal lobe anomaly mask bounding box math
 // [2026-08-04T10:34:11] docs(metrics): document model accuracy, specificity, and ROC AUC evaluation
 // [2026-08-04T17:29:23] refactor(fastapi): modularize FastAPI endpoints for multi-modality scan uploads
+// [2026-08-05T18:21:05] fix(segmentation): resolve temporal lobe anomaly mask bounding box math
