@@ -1,89 +1,87 @@
-<div align="center">
+﻿# AI-Based Tumor & Anomaly Detection
 
-<h1>🧠 AI-Based Tumor & Anomaly Detection</h1>
-<p><strong>MRI Brain Scan Analysis using Machine Learning — Upload, Analyze, Report</strong></p>
+[![Live Demo](https://img.shields.io/badge/Live_Demo-View_App-6d28d9?style=for-the-badge&logo=railway&logoColor=white)](https://mri-frontend-production.up.railway.app)
+[![React](https://img.shields.io/badge/React-18-61DAFB?style=flat-square&logo=react&logoColor=black)](https://reactjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://typescriptlang.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-Python%203.11-009688?style=flat-square&logo=fastapi)](https://fastapi.tiangolo.com/)
+[![ML](https://img.shields.io/badge/ML-Random%20Forest%20%2B%20ResNet--18-F7931E?style=flat-square&logo=scikitlearn)](https://scikit-learn.org/)
 
-<p>
-  <a href="https://mri-frontend-production.up.railway.app" target="_blank">
-    <img src="https://img.shields.io/badge/🚀 Live Demo-railway.app-6d28d9?style=for-the-badge&logoColor=white" alt="Live Demo" />
-  </a>
-  &nbsp;
-  <a href="https://github.com/AtharvaDhobale/AI-Based-Tumor-and-Anomoly-Detection" target="_blank">
-    <img src="https://img.shields.io/badge/GitHub-AtharvaDhobale-181717?style=for-the-badge&logo=github" alt="GitHub" />
-  </a>
-</p>
+**Live:** https://mri-frontend-production.up.railway.app
 
-<p>
-  <img src="https://img.shields.io/badge/React-18-61DAFB?style=flat-square&logo=react&logoColor=black" />
-  <img src="https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript&logoColor=white" />
-  <img src="https://img.shields.io/badge/FastAPI-Python 3.11-009688?style=flat-square&logo=fastapi&logoColor=white" />
-  <img src="https://img.shields.io/badge/ML-Random Forest-F7931E?style=flat-square&logo=scikitlearn&logoColor=white" />
-  <img src="https://img.shields.io/badge/Deployed-Railway-8B5CF6?style=flat-square&logo=railway&logoColor=white" />
-</p>
-
-<br/>
-
-> A web-based MRI analysis tool built as our B.Tech final year project. Upload an MRI scan, get AI-powered tumor detection results, manage patient records, and download PDF/CSV reports — all from one interface.
-
-<br/>
-
-[🔴 Live App](https://mri-frontend-production.up.railway.app) &nbsp;•&nbsp; [📁 Source Code](https://github.com/AtharvaDhobale/AI-Based-Tumor-and-Anomoly-Detection) &nbsp;•&nbsp; [🐛 Report Bug](https://github.com/AtharvaDhobale/AI-Based-Tumor-and-Anomoly-Detection/issues)
-
-</div>
+Register on the Sign Up page to upload scan reports and run AI diagnostics.
 
 ---
 
-## ⚡ Quick Access for Recruiters & HR
+A web-based MRI analysis tool built as our B.Tech final year project. Upload an MRI brain scan, get AI-powered tumor detection results, manage patient records, and download PDF/CSV reports - from one interface.
 
-> 🔗 **Live Demo:** **[https://mri-frontend-production.up.railway.app](https://mri-frontend-production.up.railway.app)**  
-> 💡 *Authorized medical staff panel is live! Register a new account on the Sign Up page to upload scan reports and run the AI diagnostics immediately.*
+> **Disclaimer:** This is an academic prototype for decision support only. Not a substitute for professional medical diagnosis.
 
 ---
 
-## 👥 Team
+## Team
 
 | Name | Role |
-|------|------|
-| **Atharva Dhobale** | Full Stack + ML Integration |
-| **Bibek Singh** | Backend & API |
-| **Dhruv Khare** | ML Model & Image Processing |
-| **Prathmesh Barse** | Frontend & Reports |
+|---|---|
+| Atharva Dhobale | Full Stack + ML Integration |
+| Bibek Singh | Backend & API |
+| Dhruv Khare | ML Model & Image Processing |
+| Prathmesh Barse | Frontend & Reports |
 
-**Project Mentor:** Dr. Jagannath Nalavade
-
----
-
-## ✨ Features
-
-- **🔐 User Authentication** — Secure login/register for authorized medical staff
-- **📤 MRI Image Upload** — Upload brain MRI scans directly from the browser
-- **🤖 AI Tumor Analysis** — Random Forest classifier with OpenCV preprocessing detects abnormalities
-- **📊 Dashboard** — Patient statistics, analysis history, and confidence scores at a glance
-- **🗂️ Patient Records** — Store and retrieve patient info and scan history
-- **📄 Report Export** — Download results as PDF or CSV for clinical reference
+**Mentor:** Dr. Jagannath Nalavade
 
 ---
 
-## 🛠️ Tech Stack
+## Features
+
+- Secure login/register for authorized medical staff
+- Upload brain MRI scans directly from the browser
+- AI tumor analysis using Random Forest + OpenCV preprocessing
+- Dashboard with patient stats, analysis history, confidence scores
+- Patient record storage and retrieval with scan history
+- PDF and CSV report export for clinical reference
+
+---
+
+## Model Performance
+
+**ResNet-18 (Deep Learning)**
+- Accuracy: 93.75%
+- Precision: 96.97%
+- Recall: 91.43%
+- F1 Score: 94.12%
+- ROC AUC: 97.54%
+
+**Random Forest (ML)**
+- Accuracy: 87.50%
+- Precision: 100.00%
+- Recall: 75.00%
+- F1 Score: 85.71%
+- ROC AUC: 89.58%
+- Zero false positives
+
+---
+
+## Tech Stack
 
 **Frontend**
 - React 18 + TypeScript
-- Vite for lightning-fast builds
-- REST API calls to FastAPI backend
+- Vite
+- REST calls to FastAPI backend
 
 **Backend**
 - Python 3.11 + FastAPI
-- SQLite for patient data storage
+- SQLite for patient data
 - JWT authentication
 
 **Machine Learning**
-- OpenCV for MRI image preprocessing and feature extraction
-- Scikit-learn Random Forest Classifier for tumor prediction
+- OpenCV for MRI preprocessing and feature extraction
+- Scikit-learn Random Forest Classifier
+- PyTorch + ResNet-18 for deep learning classification
 - Custom anomaly detection pipeline
 
 ---
 
-## 🚀 Running Locally
+## Running locally
 
 ### Backend
 
@@ -93,8 +91,8 @@ pip install -r requirements.txt
 uvicorn app.main:app --reload --port 8000
 ```
 
-API runs at → `http://localhost:8000`
-Swagger docs at → `http://localhost:8000/docs`
+API: http://localhost:8000
+Swagger docs: http://localhost:8000/docs
 
 ### Frontend
 
@@ -104,97 +102,47 @@ npm install
 npm run dev
 ```
 
-App runs at → `http://localhost:5173`
+App: http://localhost:5173
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 AI-Based-Tumor-and-Anomoly-Detection/
-├── frontend/          # React + Vite UI
-│   └── src/
-├── backend/           # FastAPI server
-│   └── app/
-│       ├── main.py    # Entry point
-│       └── routes/
-├── ai/                # ML model & preprocessing
-├── db/                # SQLite schema & migrations
-└── docs/              # Architecture & report docs
+â”œâ”€â”€ frontend/          # React + Vite UI
+â”‚   â””â”€â”€ src/
+â”œâ”€â”€ backend/           # FastAPI server
+â”‚   â””â”€â”€ app/
+â”‚       â”œâ”€â”€ main.py
+â”‚       â””â”€â”€ routes/
+â”œâ”€â”€ ai/                # ML model + preprocessing
+â”œâ”€â”€ db/                # SQLite schema + migrations
+â””â”€â”€ docs/
 ```
 
 ---
 
-## 🔄 How It Works
+## Pipeline
 
 ```
-User Login → Upload MRI Scan → OpenCV Preprocessing
-    → Feature Extraction → Random Forest Prediction
-        → Display Result + Confidence Score
-            → Save to Patient Record → Export Report
+Login -> Upload MRI -> OpenCV Preprocessing
+  -> Feature Extraction -> Random Forest / ResNet-18 Prediction
+    -> Display Result + Confidence Score
+      -> Save to Patient Record -> Export Report
 ```
 
 ---
 
-## 🗺️ Planned Improvements
+## Planned Improvements
 
-- [ ] Replace Random Forest with CNN (ResNet/EfficientNet) for higher accuracy
+- [ ] Replace Random Forest with full CNN (ResNet/EfficientNet) as default
 - [ ] DICOM format support for real hospital MRI exports
-- [ ] Tumor region heatmap overlay on original scan
+- [ ] Tumor region heatmap overlay on scan
 - [ ] Multi-class classification (glioma, meningioma, pituitary)
-- [ ] HIPAA-compliant cloud storage for patient data
+- [ ] HIPAA-compliant cloud storage
 
 ---
 
-## ⚠️ Disclaimer
-
-This project was developed for **academic and educational purposes only**. It is a decision-support prototype and should **not** be used as a substitute for professional medical diagnosis.
-
----
-
-## 📊 Model Performance & Metrics
-
-The system leverages and compares deep learning and machine learning models for classification, yielding high-accuracy predictions suitable for clinical decision support:
-
-### 🧠 Deep Learning Classifier (ResNet-18)
-* **Accuracy**: **93.75%**
-* **Precision**: **96.97%**
-* **Recall / Sensitivity**: **91.43%**
-* **Specificity**: **96.55%**
-* **F1 Score**: **94.12%**
-* **ROC AUC**: **97.54%**
-* **Error Analysis**: Achieved a low false positive rate (only 1 false positive out of evaluation samples).
-
-### 🌲 Machine Learning Classifier (Random Forest)
-* **Accuracy**: **87.50%**
-* **Precision**: **100.00%**
-* **Recall / Sensitivity**: **75.00%**
-* **Specificity**: **100.00%**
-* **F1 Score**: **85.71%**
-* **ROC AUC**: **89.58%**
-* **Error Analysis**: Zero false positives, ensuring high reliability for true negative scans.
-
----
-
-## 🔑 ATS Keywords & Technical Core
-
-* **Artificial Intelligence & Machine Learning**: Deep Learning, Convolutional Neural Networks (CNN), ResNet-18, Random Forest Classifier, Feature Extraction, Model Evaluation, Classification Metrics (Precision, Recall, Specificity, F1-Score, ROC AUC), Image Segmentation
-* **Computer Vision**: OpenCV, Albumentations (Image Augmentation & Normalization), Gray-scale Processing
-* **Core Stack**: Python, PyTorch, Scikit-Learn, FastAPI, React.js, TypeScript, Vite, SQLite
-* **Features & Formatting**: REST API Design, Secure Authentication, Patient Record Management, PDF & CSV Report Generation, Full-Stack Integration
-
----
-
-## 📄 License
-
-For academic and educational use. See [LICENSE](LICENSE) if present.
-
----
-
-<div align="center">
-  <p>Built by <a href="https://github.com/AtharvaDhobale"><strong>Atharva Dhobale</strong></a> and team &nbsp;|&nbsp; B.Tech Final Year Project</p>
-  <p>
-    <a href="https://mri-frontend-production.up.railway.app">🔴 Live Demo</a> &nbsp;•&nbsp;
-    <a href="https://github.com/AtharvaDhobale/AI-Based-Tumor-and-Anomoly-Detection">⭐ Star on GitHub</a>
-  </p>
-</div>
+*Built by Atharva Dhobale and team | B.Tech Final Year Project*
+*[Live Demo](https://mri-frontend-production.up.railway.app) | [GitHub](https://github.com/AtharvaDhobale/AI-Based-Tumor-and-Anomoly-Detection)*
