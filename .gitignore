@@ -23,3 +23,4 @@ ai/data/segmentation/
 
 # Temporary build artifacts
 frontend/src/utils.css
+.vercel
